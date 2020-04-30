@@ -17,15 +17,9 @@ three
 Si core O_O2- shel O_O2- shel 2.09724 109.47 1.9 1.9 3.5"""
 
 
-class TestLibrary(Library):
-    @property
-    def species_available(self):
-        return {'Si', 'O_O2-'}
-
-
 class TestBaseLibrary(ut.TestCase):
     def setUp(self):
-        self.library = TestLibrary(EXAMPLE_LIB.split('\n'))
+        self.library = Library(EXAMPLE_LIB.split('\n'))
 
     def test_lines(self):
         species = {'O_O2-'}

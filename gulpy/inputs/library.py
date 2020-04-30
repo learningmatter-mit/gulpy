@@ -27,7 +27,15 @@ class Library:
 
     @property
     def species_available(self):
-        raise NotImplementedError
+        species = []
+        start = self.lines.index('species') + 1
+        for line in self.lines[start:]:
+            if is_reserved(line):
+                break
+
+            species.append(line.split(' ')[0])
+
+        return set(species)
 
     def get_library(self, species=None):
         """Gets a library tailored to the given species. Particularly useful
