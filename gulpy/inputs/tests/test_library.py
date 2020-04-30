@@ -1,7 +1,7 @@
 import os
 import unittest as ut
 
-from gulpy.library import Library
+from gulpy.inputs import Library
 
 
 EXAMPLE_LIB = """species
@@ -16,9 +16,8 @@ O_O2-  74.92
 three
 Si core O_O2- shel O_O2- shel 2.09724 109.47 1.9 1.9 3.5"""
 
-class TestLibrary(Library):
-    OPTIONS = ['species', 'buckingham', 'spring', 'three']
 
+class TestLibrary(Library):
     @property
     def species_available(self):
         return {'Si', 'O_O2-'}

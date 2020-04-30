@@ -1,4 +1,5 @@
 import os
+from .options import is_reserved, is_comment
 
 
 class Library:
@@ -61,22 +62,13 @@ class Library:
         previous_line = '#'
         lines_saved = []
         for current_line in lines:
-            if not self.is_comment(previous_line):
-                if not (self.is_option(current_line) and self.is_option(previous_line)):
+            if not is_comment(previous_line):
+                if not (is_reserved(current_line) and is_reserved(previous_line)):
                     lines_saved.append(previous_line)
 
             previous_line = current_line
 
-        if not (self.is_option(current_line) and self.is_option(previous_line)):
+        if not (is_reserved(current_line) and is_reserved(previous_line)):
             lines_saved.append(previous_line)
 
         return lines_saved
-
-    def is_option(self, line):
-        return any([
-            opt in line 
-            for opt in self.OPTIONS
-        ])
-
-    def is_comment(self, line):
-        return line.startswith('#')
