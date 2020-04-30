@@ -1,4 +1,4 @@
-from .base import Labels
+from .base import Labels, MoleculeLabels
 
 
 class DreidingLabels(Labels):
@@ -36,7 +36,7 @@ class DreidingLabels(Labels):
         return self.DEFAULT_LABELS[symbol]
 
 
-class DreidingMoleculeLabels(DreidingLabels):
+class DreidingMoleculeLabels(MoleculeLabels):
     ATOMS_WITH_HYBRIDIZATION = [
         'B', 'C', 'N', 'O', 'F', 'Cl', 'Br', 'I',
         'Al', 'Si', 'P', 'S', 'Ga', 'Ge', 'As', 'Se',

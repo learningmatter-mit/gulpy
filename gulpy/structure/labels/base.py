@@ -1,4 +1,9 @@
 class Labels:
+    def __call__(self, symbol):
+        return symbol
+
+
+class MoleculeLabels(Labels):
     def is_hydrogen(self, atom):
         return atom.GetSymbol() == 'H'
 

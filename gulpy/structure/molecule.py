@@ -2,7 +2,7 @@ import re
 import rdkit.Chem.AllChem as Chem
 from rdkit.Chem import Mol, Conformer, MolFromSmiles
 
-from .labels import Labels
+from .labels import MoleculeLabels
 
 
 class GulpMolecule:
@@ -18,12 +18,12 @@ class GulpMolecule:
         'AROMATIC': 'resonant'
     }
 
-    def __init__(self, mol, labels=Labels()):
+    def __init__(self, mol, labels=MoleculeLabels()):
         self.mol = mol
         self.labels = labels
 
     @classmethod
-    def from_smiles(cls, coords, smiles, add_hydrogens=True, labels=Labels()):
+    def from_smiles(cls, coords, smiles, add_hydrogens=True, labels=MoleculeLabels()):
         mol = to_mol(coords, smiles, add_hydrogens)
         return cls(mol, labels=labels)
 

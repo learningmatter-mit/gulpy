@@ -19,6 +19,5 @@ class TestGulpMolecule(ut.TestCase):
         self.assertEqual(self.gmol.get_bonds(), bonds)
 
 
-
 if __name__ == "__main__":
     ut.main()
