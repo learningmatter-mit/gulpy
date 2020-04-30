@@ -26,7 +26,7 @@ class Library:
         return '\n'.join(self.get_library())
 
     @property
-    def species_available(self):
+    def species(self):
         species = []
         start = self.lines.index('species') + 1
         for line in self.lines[start:]:
@@ -46,7 +46,7 @@ class Library:
         """
 
         if species is None:
-            species = self.species_available
+            species = self.species
 
         species_lines = self.get_lines_with_species(species)
         clean_lines = self.review_lines(species_lines)
@@ -60,7 +60,7 @@ class Library:
                 for species in to_remove
             ])
 
-        to_remove = set(self.species_available) - set(species)
+        to_remove = set(self.species) - set(species)
         return [
             line for line in self.lines
             if not contains_removable_species(line, to_remove)
@@ -86,3 +86,4 @@ class Library:
             line for line in lines
             if not is_comment(line)
         ]
+
