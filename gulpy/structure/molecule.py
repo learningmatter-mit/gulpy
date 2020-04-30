@@ -24,9 +24,9 @@ class GulpMolecule:
         self.labels = labels
 
     @classmethod
-    def from_smiles(cls, coords, smiles, add_hydrogens=True):
+    def from_smiles(cls, coords, smiles, add_hydrogens=True, labels=Labels()):
         mol = to_mol(coords, smiles, add_hydrogens)
-        return cls(mol)
+        return cls(mol, labels=labels)
 
     def get_labels(self):
         return [
