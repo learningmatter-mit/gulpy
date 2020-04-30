@@ -68,15 +68,21 @@ class Library:
    
     def review_lines(self, lines):
         previous_line = '#'
+        lines = self.remove_comments(lines)
         lines_saved = []
         for current_line in lines:
-            if not is_comment(previous_line):
-                if not (is_reserved(current_line) and is_reserved(previous_line)):
-                    lines_saved.append(previous_line)
+            if not (is_reserved(current_line) and is_reserved(previous_line)):
+                lines_saved.append(previous_line)
 
             previous_line = current_line
 
         if not (is_reserved(current_line) and is_reserved(previous_line)):
             lines_saved.append(previous_line)
 
-        return lines_saved
+        return lines_saved[1:]
+    
+    def remove_comments(self, lines):
+        return [
+            line for line in lines
+            if not is_comment(line)
+        ]

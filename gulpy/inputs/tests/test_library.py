@@ -17,7 +17,7 @@ three
 Si core O_O2- shel O_O2- shel 2.09724 109.47 1.9 1.9 3.5"""
 
 
-class TestBaseLibrary(ut.TestCase):
+class TestLibrary(ut.TestCase):
     def setUp(self):
         self.library = Library(EXAMPLE_LIB.split('\n'))
 
