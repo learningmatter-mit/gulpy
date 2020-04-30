@@ -28,7 +28,7 @@ DEFAULT_BONDS = {
 }
 
 
-class DreidingTypes:
+class Molecule:
     """Class to deal with labels of atoms for the
         Dreiding potential. Analyzes the hybridization and
         the coordination of each atom to assign the correct
