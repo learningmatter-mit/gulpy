@@ -2,24 +2,46 @@ from .base import Labels
 
 
 class DreidingLabels(Labels):
+    DEFAULT_LABELS = {
+        'H': 'H_',
+        'B': 'B_3',
+        'C': 'C_3',
+        'N': 'N_3',
+        'O': 'O_3',
+        'F': 'F_',
+        'Cl': 'Cl',
+        'Br': 'Br',
+        'I': 'I_',
+        'Al': 'Al3',
+        'Si': 'Si3',
+        'P': 'P_3',
+        'S': 'S_3',
+        'Ga': 'Ga3',
+        'Ge': 'Ge3',
+        'As': 'As3',
+        'Se': 'Se3',
+        'In': 'In3',
+        'Sb': 'Sb3',
+        'Te': 'Te3',
+        'Na': 'Na',
+        'Ca': 'Ca',
+        'Fe': 'Fe',
+        'Zn': 'Zn',
+        'Ti': 'Ti',
+        'Tc': 'Tc',
+        'Ru': 'Ru',
+    }
+
+    def __call__(self, symbol):
+        return self.DEFAULT_LABELS[symbol]
+
+
+class DreidingMoleculeLabels(DreidingLabels):
     ATOMS_WITH_HYBRIDIZATION = [
         'B', 'C', 'N', 'O', 'F', 'Cl', 'Br', 'I',
         'Al', 'Si', 'P', 'S', 'Ga', 'Ge', 'As', 'Se',
         'Sb', 'Te'
     ]
-
-    DEFAULT_LABELS = {
-        'H': 'H_',
-        'C': 'C_3',
-        'O': 'O_3',
-        'N': 'N_3',
-        'Si': 'Si3',
-        'Ge': 'Ge3',
-        'Ga': 'Ga3',
-    }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     def __call__(self, atom):
         symbol = atom.GetSymbol()

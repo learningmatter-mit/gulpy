@@ -1,2 +1,2 @@
 from .base import Labels
-from .dreiding import DreidingLabels
+from .dreiding import DreidingLabels, DreidingMoleculeLabels

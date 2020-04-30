@@ -3,7 +3,7 @@ import unittest as ut
 
 from pymatgen.core import Molecule
 from gulpy.structure import GulpMolecule
-from gulpy.structure.labels import DreidingLabels
+from gulpy.structure.labels import DreidingMoleculeLabels
 
 
 class TestDreiding(ut.TestCase):
@@ -13,7 +13,7 @@ class TestDreiding(ut.TestCase):
         self.gmol = GulpMolecule.from_smiles(
             self.pmgmol.cart_coords,
             self.smiles,
-            labels=DreidingLabels()
+            labels=DreidingMoleculeLabels()
         )
 
     def test_labels(self):
