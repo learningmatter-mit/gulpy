@@ -1,18 +1,9 @@
 import os
 from .options import is_reserved, is_comment
+from gulpy.parser import Parser
 
 
-class Library:
-    def __init__(self, lines):
-        self.lines = lines
-
-    @classmethod
-    def from_file(cls, filename):
-        with open(filename, 'r') as f:
-            contents = [line.rstrip() for line in f]
-
-        return cls(contents)
-
+class Library(Parser):
     @classmethod
     def from_gulp(cls, library_name):
         path = os.environ('GULP_LIB', None)
