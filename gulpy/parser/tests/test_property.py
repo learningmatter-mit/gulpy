@@ -13,6 +13,10 @@ class TestParser(ut.TestCase):
         energy = self.parser.get_total_energy()
         self.assertAlmostEqual(energy, 64.96556639)
 
+    def test_gnorm(self):
+        gnorm = self.parser.get_gnorm()
+        self.assertAlmostEqual(gnorm, 0.06196731)
+
     def test_forces(self):
         forces = self.parser.get_forces()
         expected = np.array([

@@ -31,13 +31,19 @@ class StructureParser(Parser):
 
         return self.parse_matrix(self.lines[idx + 2:idx + 5])
 
-    def get_frac_coords(self, input=False):
+    def get_frac_coords(self, input=False, include_shell=False):
         if input:
             idx, _ = self.find_line('Fractional coordinates')
         else:
             idx, _ = self.find_line('Final fractional coordinates of atoms')
 
-        table = pd.DataFrame(self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 3, 4, 5]), columns=['label', 'x', 'y', 'z'])
+        table = pd.DataFrame(
+            self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 2, 3, 4, 5]),
+            columns=['label', 'cs', 'x', 'y', 'z']
+        )
+
+        if not include_shell:
+            table = table[table['cs'] == 'c']
 
         labels = table['label'].values.tolist()
         coords = table[['x', 'y', 'z']].applymap(float).values.tolist()

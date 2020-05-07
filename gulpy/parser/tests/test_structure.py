@@ -1,3 +1,4 @@
+import numpy as np
 import unittest as ut
 from pymatgen.core import Structure
 
