@@ -2,7 +2,7 @@ import re
 import pandas as pd
 
 from .base import ParseError, FLOAT_REGEX
-from .single import StructureParser
+from .structure import StructureParser
 
 
 class PropertyParser(StructureParser):
@@ -19,11 +19,14 @@ class PropertyParser(StructureParser):
         """Get forces and convert their unit to Ha/bohr"""
         idx, _ = self.find_line('Final internal derivatives')
 
-        table = pd.DataFrame(self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 3, 4, 5]), columns=['label', 'x', 'y', 'z'])
+        table = pd.DataFrame(
+            self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 3, 4, 5]),
+            columns=['label', 'x', 'y', 'z']
+        )
+
         forces = table[['x', 'y', 'z']].applymap(float).values.tolist()
 
         return forces
-
 
     def get_stress(self):
         """Get stresses and convert their unit to Ha/bohr^3"""
