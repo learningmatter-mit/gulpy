@@ -1,41 +1,20 @@
 import re
-from .base import Parser
+from .base import Parser, ParseError, FLOAT_REGEX, INT_REGEX
 
 
 class JobParser(Parser):
     def is_completed(self):
-        for line in reversed(self.lines)[:5]:
-            if 'Job Finished' in line:
-                return True
-
-        return False
-
-    def is_converged(self):
-        raise NotImplementedError
+        try:
+            idx, _  = self.find_line('Job Finished')
+            return True
+        except ParserError:
+            return False
 
     def get_version(self):
-        for line in self.lines:
-            if "Version = " in line:
-                program = "GULP"
-                version = re.findall("Version = (.*) \* Last modified.*$", line)[0]
-                return program, version
-
-        raise ParseError("GULP version not found")
+        return self.find_pattern("Version = (.*) \* Last modified.*")[0]
 
     def get_duration(self):
-        for line in reversed(self.lines):
-            if "Total CPU time" in line:
-                # PW wall clock timing is printed in a variable format:
-                #   8m21.31s WALL
-                #   1h 4m WALL
-                time = re.findall("(\d*\.\d*)", line)[0]
-                return float(time)
-
-        raise ParseError("Job duration not found")
+        return float(self.find_pattern("Total CPU time\s+%s" % FLOAT_REGEX)[-1])
 
     def get_nprocs(self):
-        for line in self.lines:
-            if "Number of CPUs" in line:
-                return int(re.findall("(\d+)", line)[0])
-
-        raise ParseError("Number of CPUs not found")
+        return int(self.find_pattern("Number of CPUs =\s+%s" % INT_REGEX)[-1])

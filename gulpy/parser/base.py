@@ -3,6 +3,7 @@ import pandas as pd
 
 
 FLOAT_REGEX = "(-?\d+(?:\.\d+)?)"
+INT_REGEX = "(-?\d+)"
 
 
 class ParseError(Exception):
