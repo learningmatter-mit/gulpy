@@ -28,6 +28,10 @@ class PropertyParser(StructureParser):
 
         return forces
 
+    def get_gnorm(self):
+        _, line = self.find_line("Final Gnorm")
+        return self.parse_float(line)
+
     def get_stress(self):
         """Get stresses and convert their unit to Ha/bohr^3"""
         raise NotImplementedError
