@@ -7,7 +7,7 @@ from gulpy.parser import JobParser
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = JobParser.from_file("files/opti.out")
+        self.parser = JobParser.from_file("files/opti/opti.out")
 
     def test_completed(self):
         self.assertTrue(self.parser.is_completed())
