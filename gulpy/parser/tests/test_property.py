@@ -7,7 +7,7 @@ from gulpy.parser import PropertyParser
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = PropertyParser.from_file("files/opt_complex.out")
+        self.parser = PropertyParser.from_file("files/opti.out")
 
     def test_energy(self):
         energy = self.parser.get_total_energy()

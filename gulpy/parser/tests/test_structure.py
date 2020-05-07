@@ -7,7 +7,7 @@ from gulpy.parser import StructureParser
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = StructureParser.from_file("files/opt_complex.out")
+        self.parser = StructureParser.from_file("files/opti.out")
 
     def test_volume(self):
         vol = self.parser.get_volume()
