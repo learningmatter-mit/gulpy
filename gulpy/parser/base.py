@@ -1,9 +1,10 @@
 import re
+import numpy as np
 import pandas as pd
 
 
 FLOAT_REGEX = "([-+]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?)"
-INT_REGEX = "(-?\d+(?:[eE][-+]?[0-9]+)?)"
+INT_REGEX = "([-+]?\d+(?:[eE][-+]?[0-9]+)?)"
 
 
 class ParseError(Exception):
@@ -38,18 +39,18 @@ class Parser:
         return float(re.findall(FLOAT_REGEX, line)[0])
 
     def parse_vector(self, line):
-        return [ float(x)
+        return np.array([ float(x)
             for x in re.findall(FLOAT_REGEX, line)
-        ]
+        ])
     
     def parse_matrix(self, lines):
-        return [
+        return np.array([
             self.parse_vector(line)
             for line in lines
-        ]
+        ])
 
     def parse_row(self, line):
-        return line.strip().split()
+        return line.replace('*', ' ').strip().split()
 
     def parse_table(self, lines):
         return [self.parse_row(line) for line in lines]
