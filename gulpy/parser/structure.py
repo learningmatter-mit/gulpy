@@ -31,7 +31,7 @@ class StructureParser(Parser):
 
         return self.parse_matrix(self.lines[idx + 2:idx + 5])
 
-    def get_frac_coords(self, input=False, include_shell=False):
+    def get_structure_table(self, input=False, include_shell=False):
         if input:
             idx, _ = self.find_line('Fractional coordinates')
         else:
@@ -41,6 +41,15 @@ class StructureParser(Parser):
             self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 2, 3, 4, 5]),
             columns=['label', 'cs', 'x', 'y', 'z']
         )
+        table[['x', 'y', 'z']] = table[['x', 'y', 'z']].applymap(float)
+
+        if not include_shell:
+            table = table[table['cs'] == 'c']
+
+        return table
+
+    def get_frac_coords(self, input=False, include_shell=False):
+        table = self.get_structure_table(input)
 
         if not include_shell:
             table = table[table['cs'] == 'c']
