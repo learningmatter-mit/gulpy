@@ -6,7 +6,6 @@ from .structure import StructureParser
 
 
 class PropertyParser(StructureParser):
-
     def get_total_energy(self):
         energies = self.find_pattern("Total lattice energy\s+=\s+%s eV" % FLOAT_REGEX)
 
@@ -17,14 +16,16 @@ class PropertyParser(StructureParser):
 
     def get_forces(self):
         """Get forces and convert their unit to Ha/bohr"""
-        idx, _ = self.find_line('Final internal derivatives')
+        idx, _ = self.find_line("Final internal derivatives")
 
         table = pd.DataFrame(
-            self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 3, 4, 5]),
-            columns=['label', 'x', 'y', 'z']
+            self.parse_columns(
+                self.lines[idx + 6 : idx + 6 + self.num_atoms], [1, 3, 4, 5]
+            ),
+            columns=["label", "x", "y", "z"],
         )
 
-        forces = table[['x', 'y', 'z']].applymap(float).values.tolist()
+        forces = table[["x", "y", "z"]].applymap(float).values.tolist()
 
         return forces
 
@@ -35,6 +36,3 @@ class PropertyParser(StructureParser):
     def get_stress(self):
         """Get stresses and convert their unit to Ha/bohr^3"""
         raise NotImplementedError
-
-
-

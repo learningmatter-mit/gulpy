@@ -25,26 +25,28 @@ class StructureParser(Parser):
 
     def get_lattice(self, input=False):
         if input:
-            idx, _ = self.find_line('Cartesian lattice vectors (Angstroms)')
+            idx, _ = self.find_line("Cartesian lattice vectors (Angstroms)")
         else:
-            idx, _ = self.find_line('Final Cartesian lattice vectors (Angstroms) :')
+            idx, _ = self.find_line("Final Cartesian lattice vectors (Angstroms) :")
 
-        return self.parse_matrix(self.lines[idx + 2:idx + 5])
+        return self.parse_matrix(self.lines[idx + 2 : idx + 5])
 
     def get_structure_table(self, input=False, include_shell=False):
         if input:
-            idx, _ = self.find_line('Fractional coordinates')
+            idx, _ = self.find_line("Fractional coordinates")
         else:
-            idx, _ = self.find_line('Final fractional coordinates of atoms')
+            idx, _ = self.find_line("Final fractional coordinates of atoms")
 
         table = pd.DataFrame(
-            self.parse_columns(self.lines[idx + 6:idx + 6 + self.num_atoms], [1, 2, 3, 4, 5]),
-            columns=['label', 'cs', 'x', 'y', 'z']
+            self.parse_columns(
+                self.lines[idx + 6 : idx + 6 + self.num_atoms], [1, 2, 3, 4, 5]
+            ),
+            columns=["label", "cs", "x", "y", "z"],
         )
-        table[['x', 'y', 'z']] = table[['x', 'y', 'z']].applymap(float)
+        table[["x", "y", "z"]] = table[["x", "y", "z"]].applymap(float)
 
         if not include_shell:
-            table = table[table['cs'] == 'c']
+            table = table[table["cs"] == "c"]
 
         return table
 
@@ -52,19 +54,19 @@ class StructureParser(Parser):
         table = self.get_structure_table(input)
 
         if not include_shell:
-            table = table[table['cs'] == 'c']
+            table = table[table["cs"] == "c"]
 
-        labels = table['label'].values.tolist()
-        coords = table[['x', 'y', 'z']].applymap(float).values.tolist()
+        labels = table["label"].values.tolist()
+        coords = table[["x", "y", "z"]].applymap(float).values.tolist()
 
         return labels, coords
 
     def get_species_labels(self):
-        idx, _ = self.find_line('Species output for all configurations')
+        idx, _ = self.find_line("Species output for all configurations")
 
         label_to_symbol = {}
-        for line in self.lines[idx + 6:]:
-            if '-------' in line:
+        for line in self.lines[idx + 6 :]:
+            if "-------" in line:
                 break
 
             row = self.parse_row(line)
@@ -87,7 +89,5 @@ class StructureParser(Parser):
             lattice=lattice,
             species=symbols,
             coords=frac_coords,
-            site_properties={'gulp_labels': labels}
+            site_properties={"gulp_labels": labels},
         )
-
-

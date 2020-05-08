@@ -17,26 +17,25 @@ class MolecularDynamicsParser(StructureParser):
 
     @classmethod
     def from_file(cls, output_file, traj_file):
-        with open(output_file, 'r') as f:
+        with open(output_file, "r") as f:
             output = [line.strip() for line in f]
 
-        with open(traj_file, 'r') as f:
+        with open(traj_file, "r") as f:
             trajectory = [line.strip() for line in f]
 
         return cls(output, trajectory)
-        frames = re.findall("#  Coordinates\n(.*?)#  Velocities", self.traj_lines, re.DOTALL)
+        frames = re.findall(
+            "#  Coordinates\n(.*?)#  Velocities", self.traj_lines, re.DOTALL
+        )
 
     def __len__(self):
         return len(self.get_step_props())
 
     def get_md_table(self, pattern):
-        text = '\n'.join(self.traj_lines)
+        text = "\n".join(self.traj_lines)
         frames = re.findall(pattern, text, re.DOTALL)
 
-        return [
-            np.array(self.parse_matrix(lines.splitlines()))
-            for lines in frames
-        ]
+        return [np.array(self.parse_matrix(lines.splitlines())) for lines in frames]
 
     def get_section(self, name):
         """gets a section of the `.trg` file containing the given name"""
@@ -59,7 +58,7 @@ class MolecularDynamicsParser(StructureParser):
 
         elif len(cells) == 0:
             return [self.get_lattice(input=True)] * len(self), True
-        
+
         raise ParseError("Invalid number of cells")
 
     def get_velocities(self):
@@ -77,7 +76,7 @@ class MolecularDynamicsParser(StructureParser):
 
         df = pd.DataFrame(
             np.concatenate(steps),
-            columns=['time', 'kinetic_energy', 'total_energy', 'temperature']
+            columns=["time", "kinetic_energy", "total_energy", "temperature"],
         ).applymap(float)
 
         return df
@@ -93,15 +92,16 @@ class MolecularDynamicsParser(StructureParser):
 
         return [
             {
-                'structure': struct, 
-                'potential_energy': en,
-                'time': time,
-                'forces': f,
-                'temperature': temp,
-                'velocities': v,
+                "structure": struct,
+                "potential_energy": en,
+                "time": time,
+                "forces": f,
+                "temperature": temp,
+                "velocities": v,
             }
             for struct, en, time, f, temp, v in zip(
-                traj, energies, props.time, forces, props.temperature, vels)
+                traj, energies, props.time, forces, props.temperature, vels
+            )
         ]
 
     def get_pymatgen_trajectory(self, include_shell=False):
@@ -110,11 +110,11 @@ class MolecularDynamicsParser(StructureParser):
         lattices, constant_lattice = self.get_md_cell()
 
         frames = [x[table.index] for x in self.get_coords()]
-        time = self.get_step_props()['time']
+        time = self.get_step_props()["time"]
         time_step = time[1] - time[0]
 
         species_labels = self.get_species_labels()
-        symbols = table['label'].map(species_labels).values.tolist()
+        symbols = table["label"].map(species_labels).values.tolist()
 
         structures = [
             Structure(
@@ -122,14 +122,11 @@ class MolecularDynamicsParser(StructureParser):
                 species=symbols,
                 coords=coords,
                 coords_are_cartesian=True,
-                site_properties={'gulp_labels': table['label']}
+                site_properties={"gulp_labels": table["label"]},
             )
             for lattice, coords in zip(lattices, frames)
         ]
 
-        return Trajectory.from_structures(structures, time_step=time_step, constant_lattice=constant_lattice)
-
-
-
-
-
+        return Trajectory.from_structures(
+            structures, time_step=time_step, constant_lattice=constant_lattice
+        )

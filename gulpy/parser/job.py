@@ -5,7 +5,7 @@ from .base import Parser, ParseError, FLOAT_REGEX, INT_REGEX
 class JobParser(Parser):
     def is_completed(self):
         try:
-            idx, _  = self.find_line('Job Finished')
+            idx, _ = self.find_line("Job Finished")
             return True
         except ParserError:
             return False
