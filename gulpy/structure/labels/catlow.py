@@ -1,8 +1,10 @@
 from collections import defaultdict
 from pymatgen.core import Site, Structure
 
+from .base import Labels
 
-class CatlowLabels:
+
+class CatlowLabels(Labels):
     CUTOFF_NEIGHBOR = 1.8
     ELEMENTS = ['Na', 'Mg', 'Al', 'Si', 'P', 'O', 'H']
 
