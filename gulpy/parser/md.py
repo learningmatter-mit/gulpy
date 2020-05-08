@@ -26,6 +26,9 @@ class MolecularDynamicsParser(StructureParser):
         return cls(output, trajectory)
         frames = re.findall("#  Coordinates\n(.*?)#  Velocities", self.traj_lines, re.DOTALL)
 
+    def __len__(self):
+        return len(self.get_step_props())
+
     def get_md_table(self, pattern):
         text = '\n'.join(self.traj_lines)
         frames = re.findall(pattern, text, re.DOTALL)
@@ -41,6 +44,23 @@ class MolecularDynamicsParser(StructureParser):
 
     def get_coords(self):
         return self.get_section("Coordinates")
+
+    def get_md_cell(self):
+        """Get all cells from the MD simulation. If the ensemble has constant
+            volume, all cells are equal.
+
+        Returns:
+            cells (list of np.array)
+            constant_lattice (bool)
+        """
+        cells = self.get_section("Cell")
+        if len(cells) == len(self):
+            return cells, False
+
+        elif len(cells) == 0:
+            return [self.get_lattice(input=True)] * len(self), True
+        
+        raise ParseError("Invalid number of cells")
 
     def get_velocities(self):
         return self.get_section("Velocities")
@@ -84,12 +104,11 @@ class MolecularDynamicsParser(StructureParser):
                 traj, energies, props.time, forces, props.temperature, vels)
         ]
 
-
-    # TODO: add case for variable lattice
     def get_pymatgen_trajectory(self, include_shell=False):
         table = self.get_structure_table(input=True, include_shell=include_shell)
 
-        lattice = self.get_lattice(input=True)
+        lattices, constant_lattice = self.get_md_cell()
+
         frames = [x[table.index] for x in self.get_coords()]
         time = self.get_step_props()['time']
         time_step = time[1] - time[0]
@@ -105,10 +124,10 @@ class MolecularDynamicsParser(StructureParser):
                 coords_are_cartesian=True,
                 site_properties={'gulp_labels': table['label']}
             )
-            for coords in frames
+            for lattice, coords in zip(lattices, frames)
         ]
 
-        return Trajectory.from_structures(structures, time_step=time_step, constant_lattice=True)
+        return Trajectory.from_structures(structures, time_step=time_step, constant_lattice=constant_lattice)
 
 
 

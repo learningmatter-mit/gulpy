@@ -7,7 +7,7 @@ from pymatgen.core.trajectory import Trajectory
 from gulpy.parser.md import MolecularDynamicsParser
 
 
-class TestParser(ut.TestCase):
+class TestNVT(ut.TestCase):
     def setUp(self):
         self.parser = MolecularDynamicsParser.from_file(
             "files/md/md.out", "files/md/md.trg"
@@ -426,10 +426,32 @@ class TestParser(ut.TestCase):
         self.assertEqual(len(traj), 5)
         self.assertIsInstance(traj, Trajectory)
 
+    def test_len(self):
+        self.assertEqual(len(self.parser), 5)
+
     def test_md_props(self):
         traj = self.parser.get_md_props()
         self.assertEqual(len(traj), 5)
         self.assertIsInstance(traj[0], dict)
+
+
+class TestNPT(ut.TestCase):
+    def setUp(self):
+        self.parser = MolecularDynamicsParser.from_file(
+            "files/md/npt.out", "files/md/npt.trg"
+        )
+
+    def test_cell(self):
+        frames = self.parser.get_md_cell()
+        self.assertEqual(len(frames), 5)
+
+        expected = np.array(
+            [[ 1.22173416e+01, -6.65624849e-03, -7.86651887e-02],
+            [-6.11433454e+00,  1.05818581e+01, -2.26421415e-03],
+            [-6.23993662e-02, -3.81284426e-02,  1.04873166e+01]]
+        )
+
+        self.assertIsNone(np.testing.assert_almost_equal(frames[0], expected))
 
 
 if __name__ == "__main__":
