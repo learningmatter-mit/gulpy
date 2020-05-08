@@ -36,8 +36,8 @@ class MoleculeLabels:
             for atom in mol.GetAtoms()
         ]
 
-    def has_shell(self) -> list:
+    def has_shell(self, mol) -> list:
         return [
             False
-            for atom in self.mol.GetAtoms()
+            for atom in mol.GetAtoms()
         ]
