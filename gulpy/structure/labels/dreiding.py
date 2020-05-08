@@ -1,3 +1,6 @@
+from rdkit.Chem import Mol, Atom
+from pymatgen.core import Structure
+
 from .base import Labels, MoleculeLabels
 
 
@@ -32,8 +35,11 @@ class DreidingLabels(Labels):
         'Ru': 'Ru',
     }
 
-    def __call__(self, symbol):
-        return self.DEFAULT_LABELS[symbol]
+    def get_labels(self, structure: Structure) -> list:
+        return [
+            self.DEFAULT_LABELS[site.species_string]
+            for site in structure.sites
+        ]
 
 
 class DreidingMoleculeLabels(MoleculeLabels):
@@ -43,12 +49,14 @@ class DreidingMoleculeLabels(MoleculeLabels):
         'Sb', 'Te'
     ]
 
-    def __call__(self, atom):
-        symbol = atom.GetSymbol()
-        hyb = self.get_atom_hybridization(atom)
+    def get_labels(self, mol: Mol):
+        return [
+            atom.GetSymbol() + self.get_atom_hybridization(atom)
+            for atom in mol.GetAtoms()
+        ]
         return symbol + hyb
 
-    def get_atom_hybridization(self, atom):
+    def get_atom_hybridization(self, atom: Atom):
         if self.is_hydrogen(atom):
             return self.get_hydrogen_hybridization(atom)
 
@@ -60,18 +68,18 @@ class DreidingMoleculeLabels(MoleculeLabels):
 
         return ''
 
-    def get_hydrogen_hybridization(self, atom):
+    def get_hydrogen_hybridization(self, atom: Atom):
         if self.is_hydrogen_bonding(atom):
             return '___A'
         else:
             return '_'
 
-    def is_hydrogen_bonding(self, atom):
+    def is_hydrogen_bonding(self, atom: Atom):
         return any([
             nbr.GetSymbol() in ['N', 'O', 'S']
             for nbr in atom.GetNeighbors()
         ])
 
-    def has_hybridization(self, atom):
+    def has_hybridization(self, atom: Atom):
         symbol = atom.GetSymbol()
         return symbol in self.ATOMS_WITH_HYBRIDIZATION
