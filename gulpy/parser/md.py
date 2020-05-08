@@ -35,21 +35,25 @@ class MolecularDynamicsParser(StructureParser):
             for lines in frames
         ]
 
+    def get_section(self, name):
+        """gets a section of the `.trg` file containing the given name"""
+        return self.get_md_table("#  %s\n(.*?)(?:#|$)" % name)
+
     def get_coords(self):
-        return self.get_md_table("#  Coordinates\n(.*?)#  Velocities")
+        return self.get_section("Coordinates")
 
     def get_velocities(self):
-        return self.get_md_table("#  Velocities\n(.*?)#  Derivatives")
+        return self.get_section("Velocities")
 
     def get_forces(self):
-        return self.get_md_table("#  Derivatives\n(.*?)#  Site energies")
+        return self.get_section("Derivatives")
 
     def get_site_energies(self):
-        frame_energies = self.get_md_table("#  Site energies\n(.*?)(?:#|$)")
+        frame_energies = self.get_section("Site energies")
         return [e.reshape(-1) for e in frame_energies]
 
     def get_step_props(self):
-        steps = self.get_md_table("#  Time/KE/E/T\n(.*?)#  Coordinates")
+        steps = self.get_section("Time/KE/E/T")
 
         df = pd.DataFrame(
             np.concatenate(steps),
