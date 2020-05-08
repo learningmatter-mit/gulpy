@@ -12,6 +12,7 @@ class GulpCrystal:
         self.structure = structure
         self.labels = labels
 
+    # TODO: implement better way to write bonds in crystals
     def get_bonds(self):
         graph = StructureGraph.with_local_env_strategy(
             self.structure,
@@ -25,17 +26,20 @@ class GulpCrystal:
         ]
 
     def get_labels(self):
-        return [
-            self.labels(atom.species_string)
-            for atom in self.structure.sites
-        ]
+        return self.labels.get_labels(self.structure)
+
+    def get_shells(self):
+        return self.labels.has_shell(self.structure)
 
     def get_renamed_structure(self):
+        gulp_labels = self.get_labels()
+        has_shell = self.get_shells()
+
         return Structure(
             species=self.structure.species,
             coords=self.structure.cart_coords,
             lattice=self.structure.lattice.matrix,
             coords_are_cartesian=True,
-            site_properties={'gulp_labels': self.get_labels()}
+            site_properties={'gulp_labels': gulp_labels, 'has_shell': has_shell}
         )
 

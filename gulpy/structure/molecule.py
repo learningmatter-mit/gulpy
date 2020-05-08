@@ -28,10 +28,7 @@ class GulpMolecule:
         return cls(mol, labels=labels)
 
     def get_labels(self):
-        return [
-            self.labels(atom)
-            for atom in self.mol.GetAtoms()
-        ]
+        return self.labels.get_labels(self.mol)
 
     def get_bonds(self):
         bonds = []
@@ -61,7 +58,6 @@ class GulpMolecule:
             site_properties={'gulp_labels': self.get_labels()}
         )
 
-    
 
 def to_mol(coords, smiles, add_hydrogens=True):
     mol = MolFromSmiles(smiles)
