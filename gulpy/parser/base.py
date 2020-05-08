@@ -2,8 +2,8 @@ import re
 import pandas as pd
 
 
-FLOAT_REGEX = "(-?\d+(?:\.\d+)?)"
-INT_REGEX = "(-?\d+)"
+FLOAT_REGEX = "([-+]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?)"
+INT_REGEX = "(-?\d+(?:[eE][-+]?[0-9]+)?)"
 
 
 class ParseError(Exception):
