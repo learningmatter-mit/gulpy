@@ -2,10 +2,11 @@ import re
 import rdkit.Chem.AllChem as Chem
 from rdkit.Chem import Mol, Conformer, MolFromSmiles
 
+from .base import GulpObject
 from .labels import MoleculeLabels
 
 
-class GulpMolecule:
+class GulpMolecule(GulpObject):
     """Class to deal with labels of atoms for GULP.
         Analyzes the hybridization and the coordination 
         of each atom to assign the correct bonds.
@@ -30,33 +31,38 @@ class GulpMolecule:
     def get_labels(self):
         return self.labels.get_labels(self.mol)
 
+    def get_shells(self):
+        return self.labels.has_shell(self.mol)
+
     def get_bonds(self):
         bonds = []
         for bond in self.mol.GetBonds():
             atom_1 = bond.GetBeginAtomIdx()
             atom_2 = bond.GetEndAtomIdx()
             btype = self.DEFAULT_BONDS[str(bond.GetBondType())]
-            bonds.append((atom_1, atom_2, btype))
+            # GULP starts counting on 1
+            bonds.append((atom_1 + 1, atom_2 + 1, btype))
 
         return bonds
 
-    @property
-    def coords(self):
+    def get_coords(self):
         return self.mol.GetConformer().GetPositions()
 
-    @property
-    def species(self):
+    def get_species(self):
         return [
             atom.GetSymbol()
             for atom in self.mol.GetAtoms()
         ]
 
-    def get_renamed_molecule(self):
+    def get_structure(self):
         return Molecule(
             species=self.species,
             coords=self.coords,
             site_properties={'gulp_labels': self.get_labels()}
         )
+
+    def get_lattice(self):
+        return None
 
 
 def to_mol(coords, smiles, add_hydrogens=True):

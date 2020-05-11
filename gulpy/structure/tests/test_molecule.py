@@ -15,7 +15,7 @@ class TestGulpMolecule(ut.TestCase):
         self.assertEqual(self.gmol.get_labels(), ['C'] * 2 + ['H'] * 6)
 
     def test_bonds(self):
-        bonds = [(0, 1, 'single'), (0, 2, 'single'), (0, 3, 'single'), (0, 4, 'single'), (1, 5, 'single'), (1, 6, 'single'), (1, 7, 'single')]
+        bonds = [(1, 2, 'single'), (1, 3, 'single'), (1, 4, 'single'), (1, 5, 'single'), (2, 6, 'single'), (2, 7, 'single'), (2, 8, 'single')]
         self.assertEqual(self.gmol.get_bonds(), bonds)
 
 

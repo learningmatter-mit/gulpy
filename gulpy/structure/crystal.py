@@ -2,10 +2,11 @@ from pymatgen.core import Structure
 from pymatgen.analysis.graphs import StructureGraph
 from pymatgen.analysis.local_env import CutOffDictNN
 
+from .base import GulpObject
 from .labels import Labels
 
 
-class GulpCrystal:
+class GulpCrystal(GulpObject):
     """Class to deal with labels of crystals for GULP.
     """
     def __init__(self, structure, labels=Labels()):
@@ -31,7 +32,7 @@ class GulpCrystal:
     def get_shells(self):
         return self.labels.has_shell(self.structure)
 
-    def get_renamed_structure(self):
+    def get_structure(self):
         gulp_labels = self.get_labels()
         has_shell = self.get_shells()
 
@@ -42,4 +43,16 @@ class GulpCrystal:
             coords_are_cartesian=True,
             site_properties={'gulp_labels': gulp_labels, 'has_shell': has_shell}
         )
+
+    def get_coords(self):
+        return self.structure.cart_coords
+
+    def get_species(self):
+        return [
+            site.species_string
+            for site in self.structure.sites
+        ]
+
+    def get_lattice(self):
+        return self.structure.lattice.matrix
 
