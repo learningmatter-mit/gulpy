@@ -4,14 +4,15 @@ from pymatgen.core import Structure, Molecule
 
 from gulpy.structure import JointStructure, GulpCrystal, GulpMolecule
 from gulpy.structure.labels import DreidingLabels, DreidingMoleculeLabels
+from gulpy.tests.test_files import load_structure, load_molecule
 
 
 class TestJointStructure(ut.TestCase):
     def setUp(self):
-        self.struct = Structure.from_file('ABW.cif')
+        self.struct = load_structure()
         self.gcrys = GulpCrystal(self.struct, DreidingLabels())
 
-        self.pmgmol = Molecule.from_file('ethane.xyz')
+        self.pmgmol = load_molecule()
         self.smiles = 'CC'
         self.gmol = GulpMolecule.from_smiles(self.pmgmol.cart_coords, self.smiles, labels=DreidingMoleculeLabels())
 

@@ -4,11 +4,12 @@ from pymatgen.core import Structure
 
 from gulpy.structure import GulpCrystal
 from gulpy.structure.labels import DreidingLabels
+from gulpy.tests.test_files import load_structure, load_molecule
 
 
 class TestGulpCrystal(ut.TestCase):
     def setUp(self):
-        self.struct = Structure.from_file('ABW.cif')
+        self.struct = load_structure()
         self.gcrys = GulpCrystal(self.struct, DreidingLabels())
 
     def test_labels(self):

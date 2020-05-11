@@ -4,11 +4,12 @@ from pymatgen.core import Structure
 
 from gulpy.structure import GulpCrystal
 from gulpy.structure.labels import CatlowLabels
+from gulpy.tests.test_files import load_structure, load_molecule
 
 
 class TestCatlow(ut.TestCase):
     def setUp(self):
-        self.struct = Structure.from_file('ABW.cif')
+        self.struct = load_structure()
         self.gcrys = GulpCrystal(self.struct, CatlowLabels())
 
     def test_labels(self):

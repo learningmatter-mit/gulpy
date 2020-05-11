@@ -4,11 +4,12 @@ import unittest as ut
 from pymatgen.core import Molecule
 from gulpy.structure import GulpMolecule
 from gulpy.structure.labels import DreidingMoleculeLabels
+from gulpy.tests.test_files import load_structure, load_molecule
 
 
 class TestDreiding(ut.TestCase):
     def setUp(self):
-        self.pmgmol = Molecule.from_file('ethane.xyz')
+        self.pmgmol = load_molecule()
         self.smiles = 'CC'
         self.gmol = GulpMolecule.from_smiles(
             self.pmgmol.cart_coords,
