@@ -13,7 +13,7 @@ class FileWriter:
             f.write(self.__str__())
 
 
-class GulpInput(FileWriter):
+class InputWriter(FileWriter):
     def __init__(
         self,
         keywords,
@@ -22,7 +22,6 @@ class GulpInput(FileWriter):
         library,
         *args,
         title='',
-        bonds=None,
         **kwargs
     ):
         super().__init__(*args, **kwargs)
@@ -31,7 +30,6 @@ class GulpInput(FileWriter):
         self.structure = structure
         self.library = library
         self.title = title
-        self.bonds = bonds
 
     def __repr__(self):
         return '<{} with keywords: {}>'.format(
@@ -50,39 +48,44 @@ class GulpInput(FileWriter):
         return '\n'.join(options_str)
 
     def _render_lattice(self):
-        if hasattr(self.structure, 'lattice'):
+        lattice = self.structure.get_lattice()
+        if lattice is not None:
             vectors = '\n'.join([
                 '%.7f %.7f %.7f' % tuple(row.tolist())
-                for row in self.structure.lattice.matrix
+                for row in lattice
             ])
             return """\nvectors\n{} \n""".format(vectors)
         return "\n"
 
     def _render_coords(self):
-        def line_from_site(site):
+        def format_coords(label, xyz):
             return '{:>5} {:>10.5f} {:>10.5f} {:>10.5f}'.format(
-                site.properties['gulp_labels'], site.x, site.y, site.z
+                label, xyz[0], xyz[1], xyz[2]
             )
 
-        coord_lines = '\n'.join([line_from_site(site) for site in self.structure.sites])
+        coords = self.structure.get_coords()
+        labels = self.structure.get_labels()
+
+        coord_lines = '\n'.join([
+            format_coords(label, xyz)
+            for label, xyz in zip(labels, coords)
+        ])
+
         return """cartesian\n{}\n""".format(coord_lines)
 
     def _render_library(self):
-        return self.library
+        return str(self.library)
 
     def _render_extras(self):
         return ''
 
     def _render_bonds(self):
-        def line_from_tuple(tup):
+        def format_bonds(tup):
             return 'connect %d %d %s' % tup
 
-        if self.bonds is None:
-            return ''
-
         return '\n'.join([
-            line_from_tuple(tup)
-            for tup in self.bonds
+            format_bonds(tup)
+            for tup in self.structure.get_bonds()
         ])
     
     def __str__(self):
@@ -96,12 +99,3 @@ class GulpInput(FileWriter):
             self._render_extras(),
             self._render_library()
         ])
-
-    @classmethod
-    def from_gulpjobspec(cls, gulpspec):
-        return cls(
-            gulpspec.keywords,
-            gulpspec.options,
-            gulpspec.structure,
-            gulpspec.library
-        )
