@@ -51,7 +51,7 @@ class StructureParser(Parser):
         return table
 
     def get_frac_coords(self, input=False, include_shell=False):
-        table = self.get_structure_table(input)
+        table = self.get_structure_table(input, include_shell)
 
         if not include_shell:
             table = table[table["cs"] == "c"]

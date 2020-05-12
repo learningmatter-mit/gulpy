@@ -18,7 +18,7 @@ class TestParser(ut.TestCase):
         self.assertEqual(n, 130)
 
     def test_lattice(self):
-        vectors = self.parser.get_lattice()
+        vectors = self.parser.get_lattice().tolist()
         expected = [
             [14.13378, -0.013675, 0.102028],
             [-0.01734, 17.029098, 0.00445],
@@ -26,7 +26,7 @@ class TestParser(ut.TestCase):
         ]
         self.assertEqual(vectors, expected)
 
-        vectors = self.parser.get_lattice(input=True)
+        vectors = self.parser.get_lattice(input=True).tolist()
         expected = [[14.110542, 0.0, 0.0], [0.0, 17.892402, 0.0], [0.0, 0.0, 5.261948]]
         self.assertEqual(vectors, expected)
 
@@ -314,6 +314,13 @@ class TestParser(ut.TestCase):
 class TestParserCoreShell(ut.TestCase):
     def setUp(self):
         self.parser = StructureParser.from_file("files/slc/coreshell.out")
+
+    def test_parsing(self):
+        _, coords = self.parser.get_frac_coords(include_shell=True)
+        self.assertEqual(len(coords), 40)
+
+        _, coords = self.parser.get_frac_coords(include_shell=False)
+        self.assertEqual(len(coords), 24)
 
     def test_noshell(self):
         _, coords = self.parser.get_frac_coords()
