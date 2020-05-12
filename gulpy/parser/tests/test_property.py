@@ -3,11 +3,12 @@ import unittest as ut
 from pymatgen.core import Structure
 
 from gulpy.parser import PropertyParser
+from gulpy.parser.tests.test_base import get_path
 
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = PropertyParser.from_file("files/opti/opti.out")
+        self.parser = PropertyParser.from_file(get_path("opti/opti.out"))
 
     def test_energy(self):
         energy = self.parser.get_total_energy()

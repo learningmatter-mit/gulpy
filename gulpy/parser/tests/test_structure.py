@@ -3,11 +3,12 @@ import unittest as ut
 from pymatgen.core import Structure
 
 from gulpy.parser import StructureParser
+from gulpy.parser.tests.test_base import get_path
 
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = StructureParser.from_file("files/opti/opti.out")
+        self.parser = StructureParser.from_file(get_path("opti/opti.out"))
 
     def test_volume(self):
         vol = self.parser.get_volume()
@@ -313,7 +314,7 @@ class TestParser(ut.TestCase):
 
 class TestParserCoreShell(ut.TestCase):
     def setUp(self):
-        self.parser = StructureParser.from_file("files/slc/coreshell.out")
+        self.parser = StructureParser.from_file(get_path("slc/coreshell.out"))
 
     def test_parsing(self):
         _, coords = self.parser.get_frac_coords(include_shell=True)

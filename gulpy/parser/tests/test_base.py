@@ -1,3 +1,4 @@
+import os
 import re
 import numpy as np
 import unittest as ut
@@ -6,6 +7,13 @@ from pymatgen.core import Structure
 
 from gulpy.parser.base import Parser, FLOAT_REGEX, INT_REGEX
 
+
+thisdir = os.path.dirname(os.path.abspath(__file__))
+inpath = os.path.join(thisdir, "files")
+
+
+def get_path(filename):
+    return os.path.join(inpath, filename)
 
 class TestRegex(ut.TestCase):
     def test_float(self):
@@ -24,11 +32,6 @@ class TestRegex(ut.TestCase):
 
         for x, y in zip(numbers, expected):
             self.assertAlmostEqual(x, y)
-
-
-class TestParser(ut.TestCase):
-    def setUp(self):
-        self.parser = Parser.from_file("files/opti/opti.out")
 
 
 if __name__ == "__main__":
