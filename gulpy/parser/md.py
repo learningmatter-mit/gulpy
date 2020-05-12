@@ -44,7 +44,7 @@ class MolecularDynamicsParser(StructureParser):
     def get_coords(self):
         return self.get_section("Coordinates")
 
-    def get_md_cell(self):
+    def get_md_cell(self) -> (list, bool):
         """Get all cells from the MD simulation. If the ensemble has constant
             volume, all cells are equal.
 

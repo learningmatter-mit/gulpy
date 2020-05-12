@@ -442,7 +442,7 @@ class TestNPT(ut.TestCase):
         )
 
     def test_cell(self):
-        frames = self.parser.get_md_cell()
+        frames, _ = self.parser.get_md_cell()
         self.assertEqual(len(frames), 5)
 
         expected = np.array(
