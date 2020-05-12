@@ -14,3 +14,5 @@ def run_gulp(inp, out, stdout):
 
     with open(stdout, "w+") as f:
         f.write(output)
+
+    return output

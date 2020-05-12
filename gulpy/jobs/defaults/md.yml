@@ -1,0 +1,15 @@
+keywords:
+    - md
+    - fix_molecule
+    - conv
+
+options:
+    cutp: 12.0 1.0
+    integrator: leapfrog verlet
+    ensemble: nvt 0.05
+    temperature: 450
+    equil: 0.05 ps
+    produ: 0.05 ps
+    timestep: 0.0001 ps
+    sample: 0.01 ps
+    write: 0.01 ps
