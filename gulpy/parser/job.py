@@ -7,7 +7,7 @@ class JobParser(Parser):
         try:
             idx, _ = self.find_line("Job Finished")
             return True
-        except ParserError:
+        except ParseError:
             return False
 
     def get_version(self):
