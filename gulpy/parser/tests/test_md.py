@@ -5,13 +5,13 @@ from pymatgen.core import Structure
 from pymatgen.core.trajectory import Trajectory
 
 from gulpy.parser.md import MolecularDynamicsParser
-from gulpy.parser.tests.test_base import get_path
+from gulpy.tests.test_files import get_jobs_path
 
 
 class TestNVT(ut.TestCase):
     def setUp(self):
         self.parser = MolecularDynamicsParser.from_file(
-            get_path("md/md.out"), get_path("md/md.trg")
+            get_jobs_path("md/md.out"), get_jobs_path("md/md.trg")
         )
 
     def test_coords(self):
@@ -439,7 +439,7 @@ class TestNVT(ut.TestCase):
 class TestNPT(ut.TestCase):
     def setUp(self):
         self.parser = MolecularDynamicsParser.from_file(
-            get_path("md/npt.out"), get_path("md/npt.trg")
+            get_jobs_path("md/npt.out"), get_jobs_path("md/npt.trg")
         )
 
     def test_cell(self):

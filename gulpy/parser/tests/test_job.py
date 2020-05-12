@@ -3,12 +3,12 @@ import unittest as ut
 from pymatgen.core import Structure
 
 from gulpy.parser import JobParser
-from gulpy.parser.tests.test_base import get_path
+from gulpy.tests.test_files import get_jobs_path
 
 
 class TestParser(ut.TestCase):
     def setUp(self):
-        self.parser = JobParser.from_file(get_path("opti/opti.out"))
+        self.parser = JobParser.from_file(get_jobs_path("opti/opti.out"))
 
     def test_completed(self):
         self.assertTrue(self.parser.is_completed())

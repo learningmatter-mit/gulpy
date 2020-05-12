@@ -5,16 +5,21 @@ from pymatgen.io.xyz import XYZ
 
 
 thisdir = os.path.dirname(os.path.abspath(__file__))
-inpath = os.path.join(thisdir, "files")
+STRUCTURES = os.path.join(thisdir, "structures")
+JOBS = os.path.join(thisdir, "jobs")
+
+
+def get_jobs_path(filename):
+    return os.path.join(JOBS, filename)
 
 
 def load_structure(filename="ABW.cif"):
-    path = os.path.join(inpath, filename)
+    path = os.path.join(STRUCTURES, filename)
     return Structure.from_file(path)
 
 
 def load_molecule(filename="ethane.xyz"):
-    path = os.path.join(inpath, filename)
+    path = os.path.join(STRUCTURES, filename)
     return Molecule.from_file(path)
 
 

@@ -8,13 +8,6 @@ from pymatgen.core import Structure
 from gulpy.parser.base import Parser, FLOAT_REGEX, INT_REGEX
 
 
-thisdir = os.path.dirname(os.path.abspath(__file__))
-inpath = os.path.join(thisdir, "files")
-
-
-def get_path(filename):
-    return os.path.join(inpath, filename)
-
 class TestRegex(ut.TestCase):
     def test_float(self):
         line = "4.15239802944899         0.333959824476882E-01      2.65878108583118"
