@@ -1,0 +1,240 @@
+single
+title
+ 
+end
+
+maxcyc 150
+
+vectors
+16.8783710 0.2590990 0.3032260
+0.2930700 18.6795480 -0.1902540
+0.1258900 -0.0698320 6.9092420 
+
+cartesian
+  C_3    2.20722   14.16508    4.62442
+  N_3    0.78028   14.48308    4.69198
+  C_3    0.48675   15.42495    5.97659
+  C_3    0.92410   16.92721    6.09666
+  C_3   17.00484   18.51425    0.11859
+  C_3    0.66485    0.81888    6.48323
+  C_3    0.08549    2.24225    0.18383
+  C_3    0.88288    3.49630    6.61846
+  N_3    0.31224    4.94167    0.19161
+  C_3   16.04133    5.56434    6.72959
+  C_2   16.98021    5.24158    1.90230
+  C_2    1.03800    5.39744    2.46811
+  C_2    2.23566    5.81484    2.03602
+  C_2    2.47252    6.04576    0.73243
+  C_3    1.52079    5.86724    6.68028
+  C_2    0.50691   14.98472    3.46629
+  C_2   16.99578   14.45175    2.81715
+  C_2   17.08286   13.24450    3.31222
+  C_2    0.35863   13.18133    4.28581
+   H_    2.62892   14.52938    5.51149
+   H_    2.53487   13.11855    4.51236
+   H_    2.73016   14.60508    3.81662
+   H_    0.91456   15.15248   -0.08090
+   H_   16.36911   15.68897    6.63181
+   H_    1.91974   16.99368    6.45760
+   H_    0.92424   17.18492    5.11730
+   H_   17.16764   18.47540    1.15782
+   H_   16.07270   18.51761    6.81618
+   H_    1.72282    0.69218    6.65145
+   H_    0.49932    0.86052    5.43986
+   H_   15.92103    2.58696    0.35487
+   H_    0.24954    2.16425    1.22362
+   H_    0.81959    3.52284    5.54555
+   H_    1.93321    3.38433    6.84179
+   H_   15.23551    4.89249    6.97252
+   H_   16.13592    5.59372    5.64139
+   H_   15.72353    6.55396    7.06409
+   H_   16.11047    4.96818    2.28698
+   H_    0.84227    5.39665    3.44117
+   H_    2.95372    5.95086    2.70516
+   H_    3.36292    6.33339    0.41542
+   H_    1.11593    6.86792    6.60754
+   H_    1.94126    5.64252    5.69377
+   H_    0.77097   15.82869    3.19233
+   H_   16.74785   14.75206    1.93113
+   H_   17.08334   12.35316    2.88582
+   H_    0.49855   12.32815    4.74277
+
+connect 1 2 single
+connect 2 3 single
+connect 3 4 single
+connect 4 5 single
+connect 5 6 single
+connect 6 7 single
+connect 7 8 single
+connect 8 9 single
+connect 9 10 single
+connect 9 11 single
+connect 11 12 double
+connect 12 13 single
+connect 13 14 double
+connect 14 15 single
+connect 2 16 single
+connect 16 17 double
+connect 17 18 single
+connect 18 19 double
+connect 19 2 single
+connect 15 9 single
+connect 1 20 single
+connect 1 21 single
+connect 1 22 single
+connect 3 23 single
+connect 3 24 single
+connect 4 25 single
+connect 4 26 single
+connect 5 27 single
+connect 5 28 single
+connect 6 29 single
+connect 6 30 single
+connect 7 31 single
+connect 7 32 single
+connect 8 33 single
+connect 8 34 single
+connect 10 35 single
+connect 10 36 single
+connect 10 37 single
+connect 11 38 single
+connect 12 39 single
+connect 13 40 single
+connect 14 41 single
+connect 15 42 single
+connect 15 43 single
+connect 16 44 single
+connect 17 45 single
+connect 18 46 single
+connect 19 47 single
+
+
+
+# Dreiding library
+# from the original GULP library
+species
+H_     core
+C_3    core
+C_2    core
+N_3    core
+O_3    core
+Si3    core
+
+keyword molmec 
+
+#
+#  Masses for consistency with Dreiding in MS and to handle implicit hydrogens
+#
+element
+mass H_       1.00800 
+mass C_3     12.01100 
+mass C_2     12.01100 
+mass N_3     14.00670 
+mass O_3     15.99940 
+mass Si3     28.08600 
+end
+#
+# Give covalent radii to ensure that bonding is consistent
+# the rtol of 0.2 was modified for the docking chemconfig
+rtol 0.2
+element
+cova H     0.420
+cova B     0.800
+cova C     0.770
+cova N     0.702 
+cova O     0.800 
+cova F     0.611 
+cova Al    1.047 
+cova Si    0.937 
+cova P     0.890 
+cova S     1.040 
+cova Ga    1.210 
+cova Ge    1.210 
+cova As    1.210 
+cova Se    1.210 
+cova In    1.390 
+cova Sn    1.373 
+cova Sb    1.432 
+cova Te    1.280
+cova I     1.360 
+end
+
+harmonic bond kcal
+ H_       H_           700.0    0.6500
+ C_3      H_           700.0    1.0900
+ C_3      C_3          700.0    1.5300
+ C_2      H_           700.0    0.9900
+ C_2      C_3          700.0    1.4300
+ C_2      C_2         1400.0    1.3300
+ N_3      H_           700.0    1.0220
+ N_3      C_3          700.0    1.4620
+ N_3      C_2          700.0    1.3620
+ N_3      N_3          700.0    1.3940
+ O_3      H_           700.0    0.9800
+ O_3      C_3          700.0    1.4200
+ O_3      C_2          700.0    1.3200
+ O_3      N_3          700.0    1.3520
+ O_3      O_3          700.0    1.3100
+ Si3      H_           700.0    1.2570
+ Si3      C_3          700.0    1.6970
+ Si3      C_2          700.0    1.5970
+ Si3      N_3          700.0    1.6290
+ Si3      O_3          700.0    1.5870
+ Si3      Si3          700.0    1.8640
+three-body bond kcal
+C_3      X X   100.0  109.4710
+C_2      X X   100.0  120.0000
+N_3      X X   100.0  106.7000
+O_3      X X   100.0  104.5100
+Si3      X X   100.0  109.4710
+torsion bond kcal dreiding single
+X     C_3   C_3   X     1.0    -3 180.00
+C_3   C_2   C_3   X     1.0    -3 180.00
+C_2   C_2   C_3   X     1/2    -6   0.00
+N_3   C_2   C_3   X     1.0    -3 180.00
+O_3   C_2   C_3   X     1.0    -3 180.00
+Si3   C_2   C_3   X     1.0    -3 180.00
+H_    C_2   C_3   X     1.0    -3 180.00
+X     C_2   C_2   X     2.5    -2   0.00
+X     N_3   C_3   X     1.0    -3 180.00
+C_3   C_2   N_3   X     1.0    -3 180.00
+C_2   C_2   N_3   X     1/2    -6   0.00
+N_3   C_2   N_3   X     1.0    -3 180.00
+O_3   C_2   N_3   X     1.0    -3 180.00
+Si3   C_2   N_3   X     1.0    -3 180.00
+H_    C_2   N_3   X     1.0    -3 180.00
+X     N_3   N_3   X     1.0    -3 180.00
+X     O_3   C_3   X     1.0    -3 180.00
+X     O_3   C_2   X     1.0    -2   0.00
+X     O_3   N_3   X     1.0    -3 180.00
+X     O_3   O_3   X     1.0    -2 180.00
+X     Si3   C_3   X     1.0    -3 180.00
+C_3   C_2   Si3   X     1.0    -3 180.00
+C_2   C_2   Si3   X     1/2    -6   0.00
+N_3   C_2   Si3   X     1.0    -3 180.00
+O_3   C_2   Si3   X     1.0    -3 180.00
+Si3   C_2   Si3   X     1.0    -3 180.00
+H_    C_2   Si3   X     1.0    -3 180.00
+X     Si3   N_3   X     1.0    -3 180.00
+X     Si3   O_3   X     1.0    -3 180.00
+X     Si3   Si3   X     1.0    -3 180.00
+torsion bond kcal dreiding double
+X     C_2   C_2   X     22.5   -2   0.00
+epsilon kcal
+H_    0.0152 3.1950
+C_3   0.0951 3.8983
+C_2   0.0951 3.8983
+N_3   0.0774 3.6621
+O_3   0.0957 3.4046
+Si3   0.3100 4.2700
+lennard epsilon 12 6 kcal x13 geometric all
+0.0 12.5
+hydrogen-bond kcal 12 10 4 taper dreiding
+H_     N_3   N_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+H_     O_3   N_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+H_     O_3   O_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+inversion bond kcal only3
+C_2  X X X 40.0

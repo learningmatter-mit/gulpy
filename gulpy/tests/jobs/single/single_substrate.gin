@@ -1,0 +1,481 @@
+single
+title
+ 
+end
+
+maxcyc 150
+
+vectors
+16.8783710 0.2590990 0.3032260
+0.2930700 18.6795480 -0.1902540
+0.1258900 -0.0698320 6.9092420 
+
+cartesian
+  O_3   13.43022   15.13666    5.26434
+  O_3    5.37225    6.15743    4.57615
+  O_3    5.35046   15.21308    5.07857
+  O_3   13.24589    5.62192    5.49214
+  O_3   14.07005   14.91009    1.49016
+  O_3    5.29363    5.97300    1.89641
+  O_3    4.76624   15.45093    2.30374
+  O_3   12.67963    5.63038    1.83443
+  O_3   13.93803   17.20217    0.16246
+  O_3    6.92822    6.87942    6.74989
+  O_3    3.92437   15.96528    6.74169
+  O_3   12.70244    7.86387    0.31820
+  O_3   14.50914   13.16244    3.89453
+  O_3    6.06547    3.83735    3.41582
+  O_3    4.64512   13.06783    3.60310
+  O_3   11.13137    4.96523    3.97042
+  O_3   15.53619   16.98559    4.77796
+  O_3    6.94670    8.30069    4.52079
+  O_3    3.02133   16.69827    4.24328
+  O_3   11.20838    7.27842    5.32413
+  O_3   15.10169   12.50476    1.69833
+  O_3    7.26591    4.23642    1.30622
+  O_3    2.97428   13.67014    1.58333
+  O_3   10.15800    4.39367    1.74725
+  O_3    3.95907   12.64168    6.20866
+  O_3   11.16993    4.79214    6.51134
+  O_3   15.39022   13.73224    6.41108
+  O_3    7.22752    4.60678    5.56026
+  O_3    3.00677   17.53818    1.64284
+  O_3   11.19182    7.87734    2.48285
+  O_3   15.49692   17.09581    2.16060
+  O_3    7.57868    6.88072    2.27415
+  O_3   12.98822   17.29944    4.73037
+  O_3    4.88006    8.29133    5.89316
+  O_3    4.82932   18.02948    5.45771
+  O_3   13.70811    7.92246    4.74306
+  O_3   12.53266   12.85093    2.20471
+  O_3    4.47187    3.74168    1.31900
+  O_3    5.60105   13.13642    1.16153
+  O_3   12.18355    3.08173    2.59232
+  O_3    6.45540   12.87706    5.38856
+  O_3   12.51710    3.05187    5.03232
+  O_3   13.17819   12.84043    6.28296
+  O_3    4.68432    3.92273    5.68668
+  O_3    5.59996   17.50462    0.90438
+  O_3   14.00192    7.88351    2.29613
+  O_3   12.65063   17.17962    2.27795
+  O_3    5.77941    8.64424    1.54916
+  O_3   13.55609    3.22617    0.41218
+  O_3    6.50881   10.79003    0.11671
+  O_3    3.86681    1.60999    6.69374
+  O_3   11.41720   11.38807    0.35145
+  O_3   14.68284   10.15178    3.72004
+  O_3    6.38456   17.93805    3.29363
+  O_3    3.85082    8.72643    3.47935
+  O_3   11.67460    0.71591    3.93558
+  O_3   13.59859    0.86917    5.92396
+  O_3    5.38248   10.57444    4.54260
+  O_3    5.45843    1.59661    4.64658
+  O_3   12.99713   10.06301    5.80349
+  O_3   13.65607   10.45149    1.29130
+  O_3    4.83643    1.21943    2.28982
+  O_3    4.61253   10.84005    2.03359
+  O_3   13.24760    0.90276    1.72815
+  O_3   15.10464    2.88351    5.09884
+  O_3    7.86292   10.78393    4.85527
+  O_3    2.96556    2.84158    4.34387
+  O_3   11.31071   11.97854    4.73777
+  O_3   15.99016    9.55713    1.65556
+  O_3    7.30872    0.43641    1.55157
+  O_3    3.15735    8.84891    0.96593
+  O_3   10.50389    0.32333    1.83146
+  O_3    3.12854   10.24272    5.54411
+  O_3   11.56367   18.40019    6.22846
+  O_3   15.52237    8.90509    6.02403
+  O_3    7.29711   18.37246    5.68756
+  O_3    2.52182    2.13857    1.85686
+  O_3   11.77689   10.36319    2.76639
+  O_3   14.89784    2.92552    2.56504
+  O_3    7.10154   11.84961    2.50229
+  O_3    9.09868    3.51625    6.22253
+  O_3    0.82804   12.94888    0.04336
+  O_3    9.25630    7.29888    4.07019
+  O_3    0.73402   18.15897    3.10091
+  O_3   11.00880    2.32698    0.23238
+  O_3    2.22103   11.21015    1.03130
+  O_3    6.89277    2.18235    6.61625
+  O_3   16.01876   11.27747    6.43063
+  O_3   10.38988    9.51200    4.66922
+  O_3    2.60713    0.46667    3.92625
+  O_3    8.22234    9.33924    2.52416
+  O_3   14.97215    0.66692    3.76985
+  O_3    9.11238    0.72534    6.37498
+  O_3    1.08705    9.21581    6.38375
+  O_3    9.47414   11.47266    3.01482
+  O_3    0.42749    2.30442    3.63177
+  Si3   14.12590   16.57136    5.52747
+  Si3    6.06899    7.32731    5.44024
+  Si3    4.34577   16.52139    5.25831
+  Si3   12.74241    7.13542    5.74568
+  Si3   13.98893   13.50944    2.37805
+  Si3    5.79133    4.42968    1.94869
+  Si3    4.51906   13.83923    2.13859
+  Si3   11.60225    4.58138    2.48833
+  Si3    5.01630   13.55982    5.14035
+  Si3   12.06486    4.56772    5.21732
+  Si3   14.13472   13.70167    5.37319
+  Si3    5.81866    4.62922    4.79855
+  Si3    4.29971   16.62420    1.25219
+  Si3   12.56232    7.26173    1.81502
+  Si3   14.03126   16.54629    1.65785
+  Si3    6.27418    7.12454    1.36925
+  Si3   13.73441    2.46197    5.85295
+  Si3    6.47664   11.26124    5.50902
+  Si3    4.22569    2.42098    5.32885
+  Si3   12.35693   11.54574    5.87432
+  Si3   14.48553    9.46334    2.25908
+  Si3    6.13409   18.66488    1.86729
+  Si3    4.35617    9.24275    2.01046
+  Si3   12.30373   18.79391    2.26708
+  Si3    4.33004    9.41550    4.88090
+  Si3   12.61452   18.78784    5.09179
+  Si3   14.26462    9.38421    5.07891
+  Si3    6.05770   18.69022    4.69077
+  Si3    4.04190    2.18628    1.29381
+  Si3   12.35912   11.32150    1.67917
+  Si3   13.48665    2.49946    1.85623
+  Si3    5.93639   11.56848    1.41853
+  Si3   10.21537    3.70619    0.29076
+  Si3    2.48229   12.65650    0.40170
+  Si3    7.60444    3.58905    6.74006
+  Si3   16.05262   12.65885    0.37757
+  Si3   10.66063    8.04843    4.04116
+  Si3    2.41482   17.78147    3.12785
+  Si3    7.99497    7.97157    3.36506
+  Si3   15.96353   17.93323    3.49050
+  Si3   10.34036    0.88974    0.33047
+  Si3    2.33876    9.93481    0.06090
+  Si3    7.60409    0.78687    6.91217
+  Si3   16.41441    9.84734    7.00120
+  Si3   10.70786   10.82672    3.80835
+  Si3    2.06329    1.87448    3.38804
+  Si3    8.05651   10.78229    3.24090
+  Si3   15.65516    2.13896    3.76969
+
+connect 1 107 single
+connect 1 97 single
+connect 2 108 single
+connect 2 98 single
+connect 3 105 single
+connect 3 99 single
+connect 4 106 single
+connect 4 100 single
+connect 5 101 single
+connect 5 111 single
+connect 6 102 single
+connect 6 112 single
+connect 7 103 single
+connect 7 109 single
+connect 8 104 single
+connect 8 110 single
+connect 9 97 single
+connect 9 111 single
+connect 10 98 single
+connect 10 112 single
+connect 11 99 single
+connect 11 109 single
+connect 12 100 single
+connect 12 110 single
+connect 13 101 single
+connect 13 107 single
+connect 14 102 single
+connect 14 108 single
+connect 15 103 single
+connect 15 105 single
+connect 16 104 single
+connect 16 106 single
+connect 17 97 single
+connect 17 136 single
+connect 18 98 single
+connect 18 135 single
+connect 19 134 single
+connect 19 99 single
+connect 20 133 single
+connect 20 100 single
+connect 21 101 single
+connect 21 132 single
+connect 22 102 single
+connect 22 131 single
+connect 23 130 single
+connect 23 103 single
+connect 24 129 single
+connect 24 104 single
+connect 25 130 single
+connect 25 105 single
+connect 26 129 single
+connect 26 106 single
+connect 27 107 single
+connect 27 132 single
+connect 28 108 single
+connect 28 131 single
+connect 29 134 single
+connect 29 109 single
+connect 30 133 single
+connect 30 110 single
+connect 31 111 single
+connect 31 136 single
+connect 32 112 single
+connect 32 135 single
+connect 33 122 single
+connect 33 97 single
+connect 34 121 single
+connect 34 98 single
+connect 35 99 single
+connect 35 124 single
+connect 36 100 single
+connect 36 123 single
+connect 37 126 single
+connect 37 101 single
+connect 38 125 single
+connect 38 102 single
+connect 39 103 single
+connect 39 128 single
+connect 40 104 single
+connect 40 127 single
+connect 41 105 single
+connect 41 114 single
+connect 42 106 single
+connect 42 113 single
+connect 43 116 single
+connect 43 107 single
+connect 44 115 single
+connect 44 108 single
+connect 45 109 single
+connect 45 118 single
+connect 46 110 single
+connect 46 117 single
+connect 47 120 single
+connect 47 111 single
+connect 48 119 single
+connect 48 112 single
+connect 49 113 single
+connect 49 127 single
+connect 50 114 single
+connect 50 128 single
+connect 51 115 single
+connect 51 125 single
+connect 52 116 single
+connect 52 126 single
+connect 53 117 single
+connect 53 123 single
+connect 54 118 single
+connect 54 124 single
+connect 55 119 single
+connect 55 121 single
+connect 56 120 single
+connect 56 122 single
+connect 57 122 single
+connect 57 113 single
+connect 58 121 single
+connect 58 114 single
+connect 59 115 single
+connect 59 124 single
+connect 60 116 single
+connect 60 123 single
+connect 61 126 single
+connect 61 117 single
+connect 62 125 single
+connect 62 118 single
+connect 63 119 single
+connect 63 128 single
+connect 64 120 single
+connect 64 127 single
+connect 65 113 single
+connect 65 144 single
+connect 66 114 single
+connect 66 143 single
+connect 67 142 single
+connect 67 115 single
+connect 68 141 single
+connect 68 116 single
+connect 69 117 single
+connect 69 140 single
+connect 70 118 single
+connect 70 139 single
+connect 71 138 single
+connect 71 119 single
+connect 72 137 single
+connect 72 120 single
+connect 73 138 single
+connect 73 121 single
+connect 74 137 single
+connect 74 122 single
+connect 75 123 single
+connect 75 140 single
+connect 76 124 single
+connect 76 139 single
+connect 77 142 single
+connect 77 125 single
+connect 78 141 single
+connect 78 126 single
+connect 79 127 single
+connect 79 144 single
+connect 80 128 single
+connect 80 143 single
+connect 81 131 single
+connect 81 129 single
+connect 82 132 single
+connect 82 130 single
+connect 83 135 single
+connect 83 133 single
+connect 84 136 single
+connect 84 134 single
+connect 85 137 single
+connect 85 129 single
+connect 86 138 single
+connect 86 130 single
+connect 87 139 single
+connect 87 131 single
+connect 88 140 single
+connect 88 132 single
+connect 89 133 single
+connect 89 141 single
+connect 90 134 single
+connect 90 142 single
+connect 91 135 single
+connect 91 143 single
+connect 92 136 single
+connect 92 144 single
+connect 93 139 single
+connect 93 137 single
+connect 94 140 single
+connect 94 138 single
+connect 95 143 single
+connect 95 141 single
+connect 96 144 single
+connect 96 142 single
+
+
+
+# Dreiding library
+# from the original GULP library
+species
+H_     core
+C_3    core
+C_2    core
+N_3    core
+O_3    core
+Si3    core
+
+keyword molmec 
+
+#
+#  Masses for consistency with Dreiding in MS and to handle implicit hydrogens
+#
+element
+mass H_       1.00800 
+mass C_3     12.01100 
+mass C_2     12.01100 
+mass N_3     14.00670 
+mass O_3     15.99940 
+mass Si3     28.08600 
+end
+#
+# Give covalent radii to ensure that bonding is consistent
+# the rtol of 0.2 was modified for the docking chemconfig
+rtol 0.2
+element
+cova H     0.420
+cova B     0.800
+cova C     0.770
+cova N     0.702 
+cova O     0.800 
+cova F     0.611 
+cova Al    1.047 
+cova Si    0.937 
+cova P     0.890 
+cova S     1.040 
+cova Ga    1.210 
+cova Ge    1.210 
+cova As    1.210 
+cova Se    1.210 
+cova In    1.390 
+cova Sn    1.373 
+cova Sb    1.432 
+cova Te    1.280
+cova I     1.360 
+end
+
+harmonic bond kcal
+ H_       H_           700.0    0.6500
+ C_3      H_           700.0    1.0900
+ C_3      C_3          700.0    1.5300
+ C_2      H_           700.0    0.9900
+ C_2      C_3          700.0    1.4300
+ C_2      C_2         1400.0    1.3300
+ N_3      H_           700.0    1.0220
+ N_3      C_3          700.0    1.4620
+ N_3      C_2          700.0    1.3620
+ N_3      N_3          700.0    1.3940
+ O_3      H_           700.0    0.9800
+ O_3      C_3          700.0    1.4200
+ O_3      C_2          700.0    1.3200
+ O_3      N_3          700.0    1.3520
+ O_3      O_3          700.0    1.3100
+ Si3      H_           700.0    1.2570
+ Si3      C_3          700.0    1.6970
+ Si3      C_2          700.0    1.5970
+ Si3      N_3          700.0    1.6290
+ Si3      O_3          700.0    1.5870
+ Si3      Si3          700.0    1.8640
+three-body bond kcal
+C_3      X X   100.0  109.4710
+C_2      X X   100.0  120.0000
+N_3      X X   100.0  106.7000
+O_3      X X   100.0  104.5100
+Si3      X X   100.0  109.4710
+torsion bond kcal dreiding single
+X     C_3   C_3   X     1.0    -3 180.00
+C_3   C_2   C_3   X     1.0    -3 180.00
+C_2   C_2   C_3   X     1/2    -6   0.00
+N_3   C_2   C_3   X     1.0    -3 180.00
+O_3   C_2   C_3   X     1.0    -3 180.00
+Si3   C_2   C_3   X     1.0    -3 180.00
+H_    C_2   C_3   X     1.0    -3 180.00
+X     C_2   C_2   X     2.5    -2   0.00
+X     N_3   C_3   X     1.0    -3 180.00
+C_3   C_2   N_3   X     1.0    -3 180.00
+C_2   C_2   N_3   X     1/2    -6   0.00
+N_3   C_2   N_3   X     1.0    -3 180.00
+O_3   C_2   N_3   X     1.0    -3 180.00
+Si3   C_2   N_3   X     1.0    -3 180.00
+H_    C_2   N_3   X     1.0    -3 180.00
+X     N_3   N_3   X     1.0    -3 180.00
+X     O_3   C_3   X     1.0    -3 180.00
+X     O_3   C_2   X     1.0    -2   0.00
+X     O_3   N_3   X     1.0    -3 180.00
+X     O_3   O_3   X     1.0    -2 180.00
+X     Si3   C_3   X     1.0    -3 180.00
+C_3   C_2   Si3   X     1.0    -3 180.00
+C_2   C_2   Si3   X     1/2    -6   0.00
+N_3   C_2   Si3   X     1.0    -3 180.00
+O_3   C_2   Si3   X     1.0    -3 180.00
+Si3   C_2   Si3   X     1.0    -3 180.00
+H_    C_2   Si3   X     1.0    -3 180.00
+X     Si3   N_3   X     1.0    -3 180.00
+X     Si3   O_3   X     1.0    -3 180.00
+X     Si3   Si3   X     1.0    -3 180.00
+torsion bond kcal dreiding double
+X     C_2   C_2   X     22.5   -2   0.00
+epsilon kcal
+H_    0.0152 3.1950
+C_3   0.0951 3.8983
+C_2   0.0951 3.8983
+N_3   0.0774 3.6621
+O_3   0.0957 3.4046
+Si3   0.3100 4.2700
+lennard epsilon 12 6 kcal x13 geometric all
+0.0 12.5
+hydrogen-bond kcal 12 10 4 taper dreiding
+H_     N_3   N_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+H_     O_3   N_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+H_     O_3   O_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+  0.0 3.0 0.0 3.0 0.0 5.0
+inversion bond kcal only3
+C_2  X X X 40.0
