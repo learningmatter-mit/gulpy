@@ -11,18 +11,6 @@ class SingleJob(Job):
     def __name__(self):
         return "single"
 
-    def parse_results(self, out):
-        parser = SingleParser.from_file(out)
-
-        return {
-            'job': {
-                'duration': parser.get_duration(),
-                'nprocs': parser.get_nprocs(),
-                'completed': parser.is_completed(),
-                'version': parser.get_version()
-            },
-            'properties': {
-                'energy': parser.get_total_energy()
-            }
-        }
-
+    @property
+    def parser(self):
+        return SingleParser

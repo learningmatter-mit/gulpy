@@ -6,3 +6,15 @@ keywords:
 
 options:
     maxcyc: 150
+
+parse:
+    duration: get_duration
+    nprocs: get_nprocs
+    completed: is_completed
+    version: get_version
+
+    energy: get_total_energy
+    forces: get_forces
+    gnorm: get_gnorm
+
+    structure: get_pymatgen_structure

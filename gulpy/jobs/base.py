@@ -1,6 +1,7 @@
 import os
 import yaml
 
+from gulpy.parser import JobParser
 from gulpy.inputs import InputWriter
 from .runtime import run_gulp
 
@@ -75,6 +76,13 @@ class Job:
     def handle_errors(self, log):
         pass
 
-    def parse_results(self, out):
-        raise NotImplementedError
+    @property
+    def parser(self):
+        return JobParser
 
+    def parse_results(self, out):
+        parser = self.parser.from_file(out)
+        return {
+            key: getattr(parser, attr)
+            for key, attr in self.parse_opts.items()
+        }
