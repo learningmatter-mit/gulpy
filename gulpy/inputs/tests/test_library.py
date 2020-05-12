@@ -71,6 +71,12 @@ class TestLibrary(ut.TestCase):
 
         self.assertEqual(str(self.library), libstr)
 
+    @ut.skipUnless('GULP_LIB' in os.environ, "GULP_LIB not defined. Skipping...")
+    def test_from_gulp(self):
+        library = Library.from_gulp('catlow.lib')
+        expected_species = {'O_OH', 'H_OH', 'Mg', 'Si', 'O_O2-', 'Al', 'Na', 'P'}
+        self.assertEqual(library.species, expected_species)
+
 
 if __name__ == "__main__":
     ut.main()

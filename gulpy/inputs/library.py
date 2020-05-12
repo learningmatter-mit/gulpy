@@ -6,7 +6,7 @@ from gulpy.parser import Parser
 class Library(Parser):
     @classmethod
     def from_gulp(cls, library_name):
-        path = os.environ("GULP_LIB", None)
+        path = os.environ.get("GULP_LIB", None)
         assert (
             path is not None
         ), "$GULP_LIB not defined. Please export this variable \
