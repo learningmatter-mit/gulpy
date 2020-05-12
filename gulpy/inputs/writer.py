@@ -58,17 +58,16 @@ class InputWriter(FileWriter):
         return "\n"
 
     def _render_coords(self):
-        def format_coords(label, xyz):
-            return '{:>5} {:>10.5f} {:>10.5f} {:>10.5f}'.format(
-                label, xyz[0], xyz[1], xyz[2]
+        def format_coords(label, cs, xyz):
+            return '{:>5} {:>5} {:>10.5f} {:>10.5f} {:>10.5f}'.format(
+                label, cs, xyz[0], xyz[1], xyz[2]
             )
-
-        coords = self.structure.get_coords()
-        labels = self.structure.get_labels()
+        
+        labels, core_shell, coords = self.structure.get_labels_shells_coords()
 
         coord_lines = '\n'.join([
-            format_coords(label, xyz)
-            for label, xyz in zip(labels, coords)
+            format_coords(label, cs, xyz)
+            for label, cs, xyz in zip(labels, core_shell, coords)
         ])
 
         return """cartesian\n{}\n""".format(coord_lines)

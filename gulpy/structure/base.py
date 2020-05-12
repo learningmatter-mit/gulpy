@@ -8,23 +8,35 @@ class GulpObject:
     def get_shells(self):
         raise NotImplementedError
 
-    def get_labels_with_shells(self):
-        labels = self.get_labels()
-        shells = self.get_shells()
-
-        labels_with_shells = []
-        core_shell = []
-        for label, has_shell in zip(labels, shells):
-            labels_with_shells += [label] * (2 if has_shell else 1)
-            core_shell += ['core', 'shell'] if has_shell else ['core']
-
-        return labels_with_shells, core_shell
-
     def get_structure(self):
         raise NotImplementedError
 
     def get_coords(self):
         raise NotImplementedError
+
+    def get_property_with_shells(self, method_name):
+        props = getattr(self, method_name)()
+        shells = self.get_shells()
+
+        props_with_shells = []
+        core_shell = []
+        for prop, has_shell in zip(props, shells):
+            props_with_shells += [prop] * (2 if has_shell else 1)
+            core_shell += ['core', 'shell'] if has_shell else ['core']
+
+        return props_with_shells, core_shell
+
+    def get_labels_with_shells(self):
+        return self.get_property_with_shells('get_labels')
+
+    def get_coords_with_shells(self):
+        return self.get_property_with_shells('get_coords')
+
+    def get_labels_shells_coords(self):
+        labels, core_shell = self.get_labels_with_shells()
+        coords, _ = self.get_coords_with_shells()
+
+        return labels, core_shell, coords
 
     def get_species(self):
         raise NotImplementedError
