@@ -13,7 +13,32 @@ class TestCatlow(ut.TestCase):
         self.gcrys = GulpCrystal(self.struct, CatlowLabels())
 
     def test_labels(self):
-        labels = ['Si', 'Si', 'Si', 'Si', 'Si', 'Si', 'Si', 'Si', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-', 'O_O2-']
+        labels = [
+            "Si",
+            "Si",
+            "Si",
+            "Si",
+            "Si",
+            "Si",
+            "Si",
+            "Si",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+            "O_O2-",
+        ]
         self.assertEqual(self.gcrys.get_labels(), labels)
 
 

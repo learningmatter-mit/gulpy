@@ -17,7 +17,11 @@ class JointStructure(GulpObject):
         elif isinstance(other, GulpObject):
             return JointStructure(self.structures + [other])
 
-        raise ValueError('object of class {} cannot be concatenated to a JointStructure'.format(other.__class__.__name__))
+        raise ValueError(
+            "object of class {} cannot be concatenated to a JointStructure".format(
+                other.__class__.__name__
+            )
+        )
 
     def _check_input(self, structures):
         assert isinstance(structures, list)
@@ -28,19 +32,15 @@ class JointStructure(GulpObject):
 
         for lat in lattices:
             np.testing.assert_almost_equal(
-                lat,
-                np.stack(lattices, axis=-1).mean(axis=-1)
+                lat, np.stack(lattices, axis=-1).mean(axis=-1)
             )
 
     def get_joint_property(self, method_name):
-        return [
-            getattr(struct, method_name)()
-            for struct in self.structures
-        ]
+        return [getattr(struct, method_name)() for struct in self.structures]
 
     def get_bonds(self):
-        bonds = self.get_joint_property('get_bonds')
-        natoms = self.get_joint_property('__len__')
+        bonds = self.get_joint_property("get_bonds")
+        natoms = self.get_joint_property("__len__")
 
         reindex = 0
         all_bonds = []
@@ -53,23 +53,20 @@ class JointStructure(GulpObject):
         return all_bonds
 
     def get_labels(self):
-        return flatten(self.get_joint_property('get_labels'))
+        return flatten(self.get_joint_property("get_labels"))
 
     def get_shells(self):
-        return flatten(self.get_joint_property('get_shells'))
+        return flatten(self.get_joint_property("get_shells"))
 
     def get_coords(self):
-        joint_coords = self.get_joint_property('get_coords')
+        joint_coords = self.get_joint_property("get_coords")
         return np.concatenate(joint_coords, axis=0)
 
     def get_species(self):
-        return flatten(self.get_joint_property('get_species'))
+        return flatten(self.get_joint_property("get_species"))
 
     def get_lattice(self):
-        lattices = [
-            x for x in self.get_joint_property('get_lattice')
-            if x is not None
-        ]
+        lattices = [x for x in self.get_joint_property("get_lattice") if x is not None]
         return list(set(lattices))[0]
 
     def get_structure(self):
@@ -81,5 +78,5 @@ class JointStructure(GulpObject):
             coords=self.get_coords(),
             lattice=self.get_lattice(),
             coords_are_cartesian=True,
-            site_properties={'gulp_labels': gulp_labels, 'has_shell': has_shell}
+            site_properties={"gulp_labels": gulp_labels, "has_shell": has_shell},
         )

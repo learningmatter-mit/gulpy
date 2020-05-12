@@ -659,11 +659,9 @@ OPTIONS = [
     "zbl",
 ]
 
+
 def is_in_keywords(text, kwds):
-    return (
-        text in kwds
-        or any([text[:4] == kw[:4] for kw in kwds])
-    )
+    return text in kwds or any([text[:4] == kw[:4] for kw in kwds])
 
 
 def is_keyword(text):
@@ -682,4 +680,4 @@ def is_reserved(text):
 
 
 def is_comment(text):
-    return text.strip().startswith('#')
+    return text.strip().startswith("#")

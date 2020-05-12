@@ -9,6 +9,7 @@ from .labels import Labels
 class GulpCrystal(GulpObject):
     """Class to deal with labels of crystals for GULP.
     """
+
     def __init__(self, structure, labels=Labels()):
         self.structure = structure
         self.labels = labels
@@ -16,15 +17,11 @@ class GulpCrystal(GulpObject):
     # TODO: implement better way to write bonds in crystals
     def get_bonds(self):
         graph = StructureGraph.with_local_env_strategy(
-            self.structure,
-            CutOffDictNN({('Si', 'O'): 2.0, ('O', 'Si'): 2.0})
+            self.structure, CutOffDictNN({("Si", "O"): 2.0, ("O", "Si"): 2.0})
         )
 
         # GULP starts counting on 1
-        return [
-            (u + 1, v + 1, 'single')
-            for u, v in graph.graph.edges()
-        ]
+        return [(u + 1, v + 1, "single") for u, v in graph.graph.edges()]
 
     def get_labels(self):
         return self.labels.get_labels(self.structure)
@@ -41,18 +38,14 @@ class GulpCrystal(GulpObject):
             coords=self.structure.cart_coords,
             lattice=self.structure.lattice.matrix,
             coords_are_cartesian=True,
-            site_properties={'gulp_labels': gulp_labels, 'has_shell': has_shell}
+            site_properties={"gulp_labels": gulp_labels, "has_shell": has_shell},
         )
 
     def get_coords(self):
         return self.structure.cart_coords
 
     def get_species(self):
-        return [
-            site.species_string
-            for site in self.structure.sites
-        ]
+        return [site.species_string for site in self.structure.sites]
 
     def get_lattice(self):
         return self.structure.lattice.matrix
-

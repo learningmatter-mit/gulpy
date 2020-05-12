@@ -13,10 +13,10 @@ class GulpMolecule(GulpObject):
     """
 
     DEFAULT_BONDS = {
-        'SINGLE': 'single',
-        'DOUBLE': 'double',
-        'TRIPLE': 'triple',
-        'AROMATIC': 'resonant'
+        "SINGLE": "single",
+        "DOUBLE": "double",
+        "TRIPLE": "triple",
+        "AROMATIC": "resonant",
     }
 
     def __init__(self, mol, labels=MoleculeLabels()):
@@ -49,16 +49,13 @@ class GulpMolecule(GulpObject):
         return self.mol.GetConformer().GetPositions()
 
     def get_species(self):
-        return [
-            atom.GetSymbol()
-            for atom in self.mol.GetAtoms()
-        ]
+        return [atom.GetSymbol() for atom in self.mol.GetAtoms()]
 
     def get_structure(self):
         return Molecule(
             species=self.species,
             coords=self.coords,
-            site_properties={'gulp_labels': self.get_labels()}
+            site_properties={"gulp_labels": self.get_labels()},
         )
 
     def get_lattice(self):
@@ -73,9 +70,7 @@ def to_mol(coords, smiles, add_hydrogens=True):
     conformer = Conformer(len(coords))
     for i, xyz in enumerate(coords):
         conformer.SetAtomPosition(i, xyz)
-    
+
     mol.AddConformer(conformer)
 
     return mol
-
-

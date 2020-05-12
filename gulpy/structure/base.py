@@ -22,15 +22,15 @@ class GulpObject:
         core_shell = []
         for prop, has_shell in zip(props, shells):
             props_with_shells += [prop] * (2 if has_shell else 1)
-            core_shell += ['core', 'shell'] if has_shell else ['core']
+            core_shell += ["core", "shell"] if has_shell else ["core"]
 
         return props_with_shells, core_shell
 
     def get_labels_with_shells(self):
-        return self.get_property_with_shells('get_labels')
+        return self.get_property_with_shells("get_labels")
 
     def get_coords_with_shells(self):
-        return self.get_property_with_shells('get_coords')
+        return self.get_property_with_shells("get_coords")
 
     def get_labels_shells_coords(self):
         labels, core_shell = self.get_labels_with_shells()
@@ -46,8 +46,8 @@ class GulpObject:
 
     def __add__(self, other):
         from .joint import JointStructure
+
         return JointStructure([self, other])
 
     def __len__(self):
         return len(self.get_species())
-
