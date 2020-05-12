@@ -1,4 +1,4 @@
-from gulpy.parser import JobParser, PropertyParser, StructureParser
+from gulpy.parser import JobParser, MolecularDynamicsParser
 from .base import Job
 
 
@@ -18,6 +18,6 @@ class MDJob(Job):
     def parse_results(self, out, traj_file):
         parser = self.parser.from_file(out, traj_file)
         return {
-            key: getattr(parser, attr)
+            key: getattr(parser, attr)()
             for key, attr in self.parse_opts.items()
         }

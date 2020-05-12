@@ -6,7 +6,8 @@ from gulpy.inputs import InputWriter
 from .runtime import run_gulp
 
 
-DEFAULTS_PATH = 'defaults'
+thisdir = os.path.dirname(os.path.abspath(__file__))
+DEFAULTS_PATH = os.path.abspath(os.path.join(thisdir, 'defaults'))
 
 INPUT_SUFFIX = 'gin'
 OUTPUT_SUFFIX = 'out'
@@ -30,7 +31,7 @@ class Job:
         return 'base_job'
 
     def get_defaults(self):
-        path = os.path.join(DEFAULTS_PATH, self.__name__, ".yml")
+        path = os.path.join(DEFAULTS_PATH, self.__name__ + ".yml")
         if not os.path.exists(path):
             return [], {}, {}
 
@@ -83,6 +84,6 @@ class Job:
     def parse_results(self, out):
         parser = self.parser.from_file(out)
         return {
-            key: getattr(parser, attr)
+            key: getattr(parser, attr)()
             for key, attr in self.parse_opts.items()
         }
