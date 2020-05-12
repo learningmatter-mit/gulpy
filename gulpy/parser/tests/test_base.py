@@ -4,7 +4,6 @@ import numpy as np
 import unittest as ut
 from pymatgen.core import Structure
 
-
 from gulpy.parser.base import Parser, FLOAT_REGEX, INT_REGEX
 
 

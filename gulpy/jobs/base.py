@@ -21,7 +21,7 @@ class Job:
     ):
         self.structure = structure
         self.library = library
-        self.keywords, self.options = self.get_defaults()
+        self.keywords, self.options, self.parse_opts = self.get_defaults()
         self.update_options(options)
 
     @property
@@ -31,12 +31,16 @@ class Job:
     def get_defaults(self):
         path = os.path.join(DEFAULTS_PATH, self.__name__, ".yml")
         if not os.path.exists(path):
-            return [], {}
+            return [], {}, {}
 
         with open(path, 'r') as f:
             defaults = yaml.safe_load(f)
 
-        return defaults['keywords'], defaults['options']
+        kwds = defaults.get('keywords', [])
+        opts = defaults.get('options', {})
+        parse_opts = defaults.get('parse', {})
+
+        return kwds, opts, parse_opts
 
     def update_keywords(self, kwds):
         self.keywords = kwds
@@ -66,6 +70,11 @@ class Job:
 
         self.handle_errors(log)
 
+        return out, stdout
+
     def handle_errors(self, log):
         pass
+
+    def parse_results(self, out):
+        raise NotImplementedError
 
