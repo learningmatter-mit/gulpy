@@ -16,12 +16,15 @@ class Job:
     def __init__(
         self,
         structure,
-        library
+        library,
+        options={}
     ):
         self.structure = structure
         self.library = library
         self.keywords, self.options = self.get_defaults()
+        self.update_options(options)
 
+    @property
     def __name__(self):
         return 'base_job'
 

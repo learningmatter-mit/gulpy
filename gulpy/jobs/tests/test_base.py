@@ -2,6 +2,7 @@ import unittest as ut
 
 from gulpy.jobs import Job
 from gulpy.inputs import Library
+from gulpy.inputs.tests.test_library import ExampleLibrary
 from gulpy.structure import GulpCrystal
 from gulpy.structure.labels import CatlowLabels
 from gulpy.tests.test_files import load_structure
@@ -10,15 +11,15 @@ from gulpy.tests.test_files import load_structure
 class TestJob(ut.TestCase):
     def setUp(self):
         self.structure = GulpCrystal(load_structure(), CatlowLabels())
-        self.library = Library.from_gulp('catlow.lib')
+        self.library = ExampleLibrary()
 
         self.job = Job(self.structure, self.library)
 
     def test_keywords(self):
-        self.assertTrue(self.job.keywords, [])
+        self.assertEqual(self.job.keywords, [])
 
     def test_options(self):
-        self.assertTrue(self.job.options, {})
+        self.assertEqual(self.job.options, {})
 
 
 if __name__ == "__main__":
