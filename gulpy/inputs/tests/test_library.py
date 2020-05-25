@@ -1,7 +1,8 @@
 import os
 import unittest as ut
 
-from gulpy.inputs import Library
+from gulpy.inputs import Library, LibraryLabels
+from gulpy.structure import labels
 
 
 class ExampleLibrary(Library):
@@ -76,6 +77,20 @@ class TestLibrary(ut.TestCase):
         library = Library.from_gulp('catlow.lib')
         expected_species = {'O_OH', 'H_OH', 'Mg', 'Si', 'O_O2-', 'Al', 'Na', 'P'}
         self.assertEqual(library.species, expected_species)
+
+
+class TestLibraryLabels(ut.TestCase):
+    def test_dreiding_structure(self):
+        lbl = LibraryLabels.get_labels('dreiding.lib')
+        self.assertEqual(lbl, labels.DreidingLabels)
+
+    def test_dreiding_molecule(self):
+        lbl = LibraryLabels.get_labels('dreiding.lib', is_molecule=True)
+        self.assertEqual(lbl, labels.DreidingMoleculeLabels)
+
+    def test_catlow(self):
+        lbl = LibraryLabels.get_labels('catlow.lib')
+        self.assertEqual(lbl, labels.CatlowLabels)
 
 
 if __name__ == "__main__":

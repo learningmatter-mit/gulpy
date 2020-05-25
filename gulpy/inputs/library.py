@@ -1,6 +1,8 @@
 import os
-from .options import is_reserved, is_comment
+
 from gulpy.parser import Parser
+from gulpy.structure import labels
+from .options import is_reserved, is_comment
 
 
 class Library(Parser):
@@ -73,3 +75,20 @@ class Library(Parser):
 
     def remove_comments(self, lines):
         return [line for line in lines if not is_comment(line)]
+
+
+class LibraryLabels:
+    STRUCT_LABELS = {
+        'catlow.lib': labels.CatlowLabels,
+        'dreiding.lib': labels.DreidingLabels,
+    }
+
+    MOLECULE_LABELS = {
+        'dreiding.lib': labels.DreidingMoleculeLabels,
+    }
+
+    @staticmethod
+    def get_labels(library, is_molecule=False):
+        labels = LibraryLabels.MOLECULE_LABELS if is_molecule else LibraryLabels.STRUCT_LABELS
+        return labels[library]
+
