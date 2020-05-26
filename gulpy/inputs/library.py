@@ -2,7 +2,7 @@ import os
 
 from gulpy.parser import Parser
 from gulpy.structure import labels
-from .options import is_header, is_comment
+from .options import is_header, is_comment, is_reserved
 
 
 class Library(Parser):
@@ -24,7 +24,7 @@ class Library(Parser):
         species = []
         start = self.lines.index("species") + 1
         for line in self.lines[start:]:
-            if is_header(line):
+            if is_reserved(line):
                 break
 
             element = line.split(" ")[0]
@@ -72,6 +72,8 @@ class Library(Parser):
     def review_lines(self, lines):
         previous_line = "#"
         lines = self.remove_comments(lines)
+        lines = self.remove_blanks(lines)
+
         lines_saved = []
         for current_line in lines:
             if not (is_header(current_line) and is_header(previous_line)):
@@ -86,6 +88,9 @@ class Library(Parser):
 
     def remove_comments(self, lines):
         return [line for line in lines if not is_comment(line)]
+
+    def remove_blanks(self, lines):
+        return [line for line in lines if line]
 
 
 class LibraryLabels:
