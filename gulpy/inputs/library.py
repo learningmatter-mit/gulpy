@@ -2,7 +2,7 @@ import os
 
 from gulpy.parser import Parser
 from gulpy.structure import labels
-from .options import is_reserved, is_comment
+from .options import is_header, is_comment
 
 
 class Library(Parser):
@@ -22,9 +22,9 @@ class Library(Parser):
     @property
     def species(self):
         species = []
-        start = self.lines.index("species") + 1
+        start = self.find_line("species") + 1
         for line in self.lines[start:]:
-            if is_reserved(line):
+            if is_header(line):
                 break
 
             element = line.split(" ")[0]
@@ -74,12 +74,12 @@ class Library(Parser):
         lines = self.remove_comments(lines)
         lines_saved = []
         for current_line in lines:
-            if not (is_reserved(current_line) and is_reserved(previous_line)):
+            if not (is_header(current_line) and is_header(previous_line)):
                 lines_saved.append(previous_line)
 
             previous_line = current_line
 
-        if not is_reserved(previous_line):
+        if not is_header(previous_line):
             lines_saved.append(previous_line)
 
         return lines_saved[1:]
