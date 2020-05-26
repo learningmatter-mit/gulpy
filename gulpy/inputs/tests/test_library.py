@@ -1,7 +1,7 @@
 import os
 import unittest as ut
 
-from gulpy.inputs import Library, LibraryLabels
+from gulpy.inputs.library import Library, LibraryLabels
 from gulpy.structure import labels
 
 
@@ -78,6 +78,21 @@ class TestLibrary(ut.TestCase):
         expected_species = {'O_OH', 'H_OH', 'Mg', 'Si', 'O_O2-', 'Al', 'Na', 'P'}
         self.assertEqual(library.species, expected_species)
 
+    def test_join(self):
+        old = ['a', 'b &', 'c', 'd']
+        new = ['a', 'b & c', 'd']
+        self.assertEqual(
+            self.library.join_ampersand(old),
+            new
+        )
+
+    def test_break(self):
+        old = ['a', 'b &', 'c', 'd']
+        new = ['a', 'b & c', 'd']
+        self.assertEqual(
+            self.library.break_ampersand(new),
+            old
+        )
 
 class TestLibraryLabels(ut.TestCase):
     def test_dreiding_structure(self):

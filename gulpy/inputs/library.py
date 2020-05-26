@@ -27,7 +27,9 @@ class Library(Parser):
             if is_reserved(line):
                 break
 
-            species.append(line.split(" ")[0])
+            element = line.split(" ")[0]
+            if element != "":
+                species.append(element)
 
         return set(species)
 
@@ -52,11 +54,20 @@ class Library(Parser):
             return any([species in line for species in to_remove])
 
         to_remove = set(self.species) - set(species)
-        return [
+
+        return self.break_ampersand([
             line
-            for line in self.lines
+            for line in self.join_ampersand(self.lines)
             if not contains_removable_species(line, to_remove)
-        ]
+        ])
+
+    def join_ampersand(self, lines):
+        text = "\n".join(lines)
+        return text.replace("&\n", "& ").splitlines()
+
+    def break_ampersand(self, lines):
+        text = "\n".join(lines)
+        return text.replace("& ", "&\n").splitlines()
 
     def review_lines(self, lines):
         previous_line = "#"
@@ -68,7 +79,7 @@ class Library(Parser):
 
             previous_line = current_line
 
-        if not (is_reserved(current_line) and is_reserved(previous_line)):
+        if not is_reserved(previous_line):
             lines_saved.append(previous_line)
 
         return lines_saved[1:]
