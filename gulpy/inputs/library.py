@@ -22,7 +22,7 @@ class Library(Parser):
     @property
     def species(self):
         species = []
-        start = self.find_line("species") + 1
+        start = self.lines.index("species") + 1
         for line in self.lines[start:]:
             if is_header(line):
                 break
