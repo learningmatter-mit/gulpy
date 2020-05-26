@@ -8,3 +8,4 @@ parse:
     version: get_version
 
     energy: get_total_energy
+    structure: get_pymatgen_structure

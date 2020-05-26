@@ -80,10 +80,12 @@ class StructureParser(Parser):
     def get_pymatgen_structure(self):
         try:
             lattice = self.get_lattice()
+            labels, frac_coords = self.get_frac_coords()
+
         except ParseError:
             lattice = self.get_lattice(input=True)
+            labels, frac_coords = self.get_frac_coords(input=True)
 
-        labels, frac_coords = self.get_frac_coords()
         renamer = self.get_species_labels()
         symbols = [renamer[l] for l in labels]
 
