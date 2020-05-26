@@ -82,15 +82,15 @@ class TestLibrary(ut.TestCase):
 class TestLibraryLabels(ut.TestCase):
     def test_dreiding_structure(self):
         lbl = LibraryLabels.get_labels('dreiding.lib')
-        self.assertEqual(lbl, labels.DreidingLabels)
+        self.assertIsInstance(lbl, labels.DreidingLabels)
 
     def test_dreiding_molecule(self):
         lbl = LibraryLabels.get_labels('dreiding.lib', is_molecule=True)
-        self.assertEqual(lbl, labels.DreidingMoleculeLabels)
+        self.assertIsInstance(lbl, labels.DreidingMoleculeLabels)
 
     def test_catlow(self):
         lbl = LibraryLabels.get_labels('catlow.lib')
-        self.assertEqual(lbl, labels.CatlowLabels)
+        self.assertIsInstance(lbl, labels.CatlowLabels)
 
 
 if __name__ == "__main__":

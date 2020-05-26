@@ -90,5 +90,5 @@ class LibraryLabels:
     @staticmethod
     def get_labels(library, is_molecule=False):
         labels = LibraryLabels.MOLECULE_LABELS if is_molecule else LibraryLabels.STRUCT_LABELS
-        return labels[library]
+        return labels[library]()
 
