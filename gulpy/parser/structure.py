@@ -78,8 +78,10 @@ class StructureParser(Parser):
         return label_to_symbol
 
     def get_pymatgen_structure(self):
-
-        lattice = self.get_lattice(self.lines)
+        try:
+            lattice = self.get_lattice()
+        except ParseError:
+            lattice = self.get_lattice(input=True)
 
         labels, frac_coords = self.get_frac_coords()
         renamer = self.get_species_labels()
