@@ -42,7 +42,7 @@ class InputWriter(FileWriter):
         lattice = self.structure.get_lattice()
         if lattice is not None:
             vectors = "\n".join([
-                "{:>12.7f} {:>12.7f} {:>12.7f}".format(*row.tolist())
+                "{:>12.7f} {:>12.7f} {:>12.7f}".format(*row)
                 for row in lattice
             ])
             return """\nvectors\n{} \n""".format(vectors)
