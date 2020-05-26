@@ -2,6 +2,8 @@ import re
 import rdkit.Chem.AllChem as Chem
 from rdkit.Chem import Mol, Conformer, MolFromSmiles
 
+from pymatgen.core import Molecule
+
 from .base import GulpObject
 from .labels import MoleculeLabels
 
@@ -53,8 +55,8 @@ class GulpMolecule(GulpObject):
 
     def get_structure(self):
         return Molecule(
-            species=self.species,
-            coords=self.coords,
+            species=self.get_species(),
+            coords=self.get_coords(),
             site_properties={"gulp_labels": self.get_labels()},
         )
 
