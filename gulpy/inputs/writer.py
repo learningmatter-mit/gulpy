@@ -41,9 +41,10 @@ class InputWriter(FileWriter):
     def _render_lattice(self):
         lattice = self.structure.get_lattice()
         if lattice is not None:
-            vectors = "\n".join(
-                ["%.7f %.7f %.7f" % tuple(row.tolist()) for row in lattice]
-            )
+            vectors = "\n".join([
+                "{:>12.7f} {:>12.7f} {:>12.7f}".format(*row.tolist())
+                for row in lattice
+            ])
             return """\nvectors\n{} \n""".format(vectors)
         return "\n"
 
@@ -65,7 +66,8 @@ class InputWriter(FileWriter):
         return """cartesian\n{}\n""".format(coord_lines)
 
     def _render_library(self):
-        return str(self.library)
+        species = set(self.structure.get_labels())
+        return "\n".join(self.library.get_library(species))
 
     def _render_extras(self):
         return ""
