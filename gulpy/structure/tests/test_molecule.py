@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import unittest as ut
 
 from pymatgen.core import Molecule
@@ -29,6 +30,12 @@ class TestGulpMolecule(ut.TestCase):
 
     def test_struct(self):
         self.assertIsInstance(self.gmol.get_structure(), Molecule)
+
+    def test_lattice(self):
+        lattice = np.eye(3).tolist()
+        mol = GulpMolecule.from_smiles(self.pmgmol.cart_coords, self.smiles, lattice=lattice)
+
+        self.assertEqual(mol.get_lattice(), lattice)
 
 
 if __name__ == "__main__":

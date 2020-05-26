@@ -21,14 +21,15 @@ class GulpMolecule(GulpObject):
         "AROMATIC": "resonant",
     }
 
-    def __init__(self, mol, labels=MoleculeLabels()):
+    def __init__(self, mol, labels=MoleculeLabels(), lattice=None):
         self.mol = mol
         self.labels = labels
+        self.lattice = lattice
 
     @classmethod
-    def from_smiles(cls, coords, smiles, add_hydrogens=True, labels=MoleculeLabels()):
+    def from_smiles(cls, coords, smiles, add_hydrogens=True, **kwargs):
         mol = to_mol(coords, smiles, add_hydrogens)
-        return cls(mol, labels=labels)
+        return cls(mol, **kwargs)
 
     def get_labels(self):
         return self.labels.get_labels(self.mol)
@@ -61,7 +62,7 @@ class GulpMolecule(GulpObject):
         )
 
     def get_lattice(self):
-        return None
+        return self.lattice
 
 
 def to_mol(coords, smiles, add_hydrogens=True):
