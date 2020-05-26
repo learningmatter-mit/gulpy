@@ -19,12 +19,16 @@ class Job:
         self,
         structure,
         library,
-        options={}
+        keywords=[],
+        options={},
     ):
         self.structure = structure
         self.library = library
         self.keywords, self.options, self.parse_opts = self.get_defaults()
         self.update_options(options)
+
+        if keywords != []:
+            self.override_keywords(keywords)
 
     @property
     def __name__(self):
@@ -44,7 +48,7 @@ class Job:
 
         return kwds, opts, parse_opts
 
-    def update_keywords(self, kwds):
+    def override_keywords(self, kwds):
         self.keywords = kwds
 
     def update_options(self, opts):
