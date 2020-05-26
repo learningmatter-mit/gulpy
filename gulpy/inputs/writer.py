@@ -17,7 +17,6 @@ class InputWriter(FileWriter):
     def __init__(
         self, keywords, options, structure, library, *args, title="", **kwargs
     ):
-        super().__init__(*args, **kwargs)
         self.keywords = keywords
         self.options = options
         self.structure = structure
