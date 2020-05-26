@@ -67,7 +67,7 @@ class JointStructure(GulpObject):
 
     def get_lattice(self):
         lattices = [x for x in self.get_joint_property("get_lattice") if x is not None]
-        return list(set(lattices))[0]
+        return lattices[0]
 
     def get_structure(self):
         gulp_labels = self.get_labels()

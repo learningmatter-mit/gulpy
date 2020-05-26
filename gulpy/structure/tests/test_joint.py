@@ -1,4 +1,5 @@
 import unittest as ut
+import numpy as np
 
 from pymatgen.core import Structure, Molecule
 
@@ -18,13 +19,13 @@ class TestJointStructure(ut.TestCase):
             self.pmgmol.cart_coords, self.smiles, labels=DreidingMoleculeLabels()
         )
 
+        self.joint = self.gcrys + self.gmol
+
     def test_add(self):
-        joint = self.gcrys + self.gmol
-        self.assertIsInstance(joint, JointStructure)
-        self.assertEqual(len(joint), len(self.gcrys) + len(self.gmol))
+        self.assertIsInstance(self.joint, JointStructure)
+        self.assertEqual(len(self.joint), len(self.gcrys) + len(self.gmol))
 
     def test_labels(self):
-        joint = self.gcrys + self.gmol
         labels = [
             "Si3",
             "Si3",
@@ -59,10 +60,9 @@ class TestJointStructure(ut.TestCase):
             "H_",
             "H_",
         ]
-        self.assertEqual(joint.get_labels(), labels)
+        self.assertEqual(self.joint.get_labels(), labels)
 
     def test_bonds(self):
-        joint = self.gcrys + self.gmol
 
         bonds_gcrys = [
             (1, 13, "single"),
@@ -112,7 +112,17 @@ class TestJointStructure(ut.TestCase):
             for u, v, btype in bonds_gmol
         ]
 
-        self.assertEqual(joint.get_bonds(), bonds_gcrys + bonds_gmol)
+        self.assertEqual(self.joint.get_bonds(), bonds_gcrys + bonds_gmol)
+
+    def test_lattice(self):
+        expected = np.array([
+            [9.873, 0, 0],
+            [0, 5.254, 0],
+            [0, 0, 8.77]
+        ])
+        self.assertIsNone(np.testing.assert_almost_equal(
+            self.joint.get_lattice(), expected
+        ))
 
 
 if __name__ == "__main__":
