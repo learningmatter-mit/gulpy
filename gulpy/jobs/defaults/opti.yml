@@ -18,3 +18,4 @@ parse:
     gnorm: get_gnorm
 
     structure: get_pymatgen_structure
+    num_molecules: get_num_molecules
