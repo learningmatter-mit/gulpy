@@ -17,7 +17,11 @@ class StructureParser(Parser):
 
     def get_num_atoms(self):
         _, line = self.find_line("Total number atoms/shells")
-        return int(self.parse_vector(line)[0])
+        return self.parse_int(line)
+
+    def get_num_molecules(self):
+        _, line = self.find_line("Total number of molecules")
+        return self.parse_int(line)
 
     def get_volume(self):
         _, line = self.find_line("Initial cell volume")

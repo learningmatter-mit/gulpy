@@ -18,6 +18,10 @@ class TestParser(ut.TestCase):
         n = self.parser.get_num_atoms()
         self.assertEqual(n, 130)
 
+    def test_num_molecules(self):
+        n = self.parser.get_num_molecules()
+        self.assertEqual(n, 3)
+
     def test_lattice(self):
         vectors = self.parser.get_lattice().tolist()
         expected = [
