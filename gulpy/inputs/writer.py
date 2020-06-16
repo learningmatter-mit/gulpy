@@ -35,7 +35,13 @@ class InputWriter(FileWriter):
         return """title\n {}\nend\n""".format(self.title)
 
     def _render_options(self):
-        options_str = ["{} {}".format(opt, val) for opt, val in self.options.items()]
+        options_str = []
+        for opt, val in self.options.items():
+            if type(val) == list:
+                options_str += ["\n".join([opt, *val])]
+            else:
+                options_str += ["{} {}".format(opt, val)]
+
         return "\n".join(options_str)
 
     def _render_lattice(self):
