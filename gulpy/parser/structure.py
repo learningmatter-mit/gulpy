@@ -1,7 +1,7 @@
 import re
 import pandas as pd
 from rdkit.Chem import AllChem as Chem
-from pymatgen.core import Structure
+from pymatgen.core import Structure, Molecule
 
 
 from .base import Parser, ParseError
@@ -31,8 +31,11 @@ class StructureParser(Parser):
         _, line = self.find_line("Dimensionality =")
         return self.parse_int(line)
 
+    def is_bulk(self) -> bool:
+        return self.get_dimensionality() == 3
+
     def get_lattice(self, input=False):
-        if self.get_dimensionality() != 3:
+        if not self.is_bulk():
             return []
 
         if input:
@@ -43,7 +46,7 @@ class StructureParser(Parser):
         return self.parse_matrix(self.lines[idx + 2 : idx + 5])
 
     def get_structure_table(self, input=False, include_shell=False):
-        coords_type = "Fractional" if self.get_dimensionality() == 3 else "Cartesian"
+        coords_type = "Fractional" if self.is_bulk() else "Cartesian"
         if input:
             idx, _ = self.find_line(f"{coords_type} coordinates")
         else:
@@ -62,7 +65,7 @@ class StructureParser(Parser):
 
         return table
 
-    def get_frac_coords(self, input=False, include_shell=False):
+    def get_coords(self, input=False, include_shell=False):
         table = self.get_structure_table(input, include_shell)
 
         if not include_shell:
@@ -90,13 +93,16 @@ class StructureParser(Parser):
         return label_to_symbol
 
     def get_pymatgen_structure(self):
+        if not self.is_bulk():
+            return self.get_pymatgen_molecule()
+
         try:
             lattice = self.get_lattice()
-            labels, frac_coords = self.get_frac_coords()
+            labels, frac_coords = self.get_coords()
 
         except ParseError:
             lattice = self.get_lattice(input=True)
-            labels, frac_coords = self.get_frac_coords(input=True)
+            labels, frac_coords = self.get_coords(input=True)
 
         renamer = self.get_species_labels()
         symbols = [renamer[l] for l in labels]
@@ -107,3 +113,19 @@ class StructureParser(Parser):
             coords=frac_coords,
             site_properties={"gulp_labels": labels},
         )
+
+    def get_pymatgen_molecule(self):
+        try:
+            labels, cart_coords = self.get_coords()
+        except ParseError:
+            labels, cart_coords = self.get_coords(input=True)
+
+        renamer = self.get_species_labels()
+        symbols = [renamer[l] for l in labels]
+
+        return Molecule(
+            species=symbols,
+            coords=cart_coords,
+            site_properties={"gulp_labels": labels},
+        )
+

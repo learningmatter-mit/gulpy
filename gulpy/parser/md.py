@@ -2,7 +2,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from pymatgen.core import Structure
+from pymatgen.core import Structure, Molecule
 from pymatgen.core.trajectory import Trajectory
 
 from .base import Parser, ParseError
@@ -41,7 +41,7 @@ class MolecularDynamicsParser(StructureParser):
         """gets a section of the `.trg` file containing the given name"""
         return self.get_md_table("#  %s\n(.*?)(?:#|$)" % name)
 
-    def get_coords(self):
+    def get_md_coords(self):
         return self.get_section("Coordinates")
 
     def get_md_cell(self) -> (list, bool):
@@ -88,7 +88,7 @@ class MolecularDynamicsParser(StructureParser):
         vels = [x[table.index] for x in self.get_velocities()]
         energies = [x[table.index].sum() for x in self.get_site_energies()]
         props = self.get_step_props()
-        traj = self.get_pymatgen_trajectory(include_shell)
+        traj = self.get_pymatgen_trajectory(include_shell) if self.is_bulk() else self.get_pymatgen_molecules(include_shell)
 
         return [
             {
@@ -109,7 +109,7 @@ class MolecularDynamicsParser(StructureParser):
 
         lattices, constant_lattice = self.get_md_cell()
 
-        frames = [x[table.index] for x in self.get_coords()]
+        frames = [x[table.index] for x in self.get_md_coords()]
         time = self.get_step_props()["time"]
         time_step = time[1] - time[0]
 
@@ -130,3 +130,20 @@ class MolecularDynamicsParser(StructureParser):
         return Trajectory.from_structures(
             structures, time_step=time_step, constant_lattice=constant_lattice
         )
+
+    def get_pymatgen_molecules(self, include_shell=False):
+        table = self.get_structure_table(input=True, include_shell=include_shell)
+
+        frames = [x[table.index] for x in self.get_md_coords()]
+
+        species_labels = self.get_species_labels()
+        symbols = table["label"].map(species_labels).values.tolist()
+
+        return [
+            Molecule(
+                species=symbols,
+                coords=coords,
+                site_properties={"gulp_labels": table["label"]},
+            )
+            for coords in frames
+        ]

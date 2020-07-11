@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
 import unittest as ut
-from pymatgen.core import Structure
+from pymatgen.core import Structure, Molecule
 from pymatgen.core.trajectory import Trajectory
 
+from gulpy.parser import ParseError
 from gulpy.parser.md import MolecularDynamicsParser
 from gulpy.tests.test_files import get_jobs_path
 
@@ -15,7 +16,7 @@ class TestNVT(ut.TestCase):
         )
 
     def test_coords(self):
-        frames = self.parser.get_coords()
+        frames = self.parser.get_md_coords()
         self.assertEqual(len(frames), 5)
 
         expected_frame_1 = np.array(
@@ -455,6 +456,17 @@ class TestNPT(ut.TestCase):
         )
 
         self.assertIsNone(np.testing.assert_almost_equal(frames[0], expected))
+
+
+class TestMoleculeMD(ut.TestCase):
+    def setUp(self):
+        self.parser = MolecularDynamicsParser.from_file(
+            get_jobs_path("md/molecule.out"), get_jobs_path("md/molecule.trg")
+        )
+
+    def test_md_props(self):
+        frame = self.parser.get_md_props()[0]
+        self.assertIsInstance(frame['structure'], Molecule)
 
 
 if __name__ == "__main__":

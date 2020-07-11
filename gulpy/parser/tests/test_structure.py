@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import unittest as ut
-from pymatgen.core import Structure
+from pymatgen.core import Structure, Molecule
 
 from gulpy.parser import StructureParser, ParseError
 from gulpy.tests.test_files import get_jobs_path
@@ -41,7 +41,7 @@ class TestParser(ut.TestCase):
         self.assertEqual(vectors, expected)
 
     def test_frac_coords(self):
-        labels, coords = self.parser.get_frac_coords()
+        labels, coords = self.parser.get_coords()
         expected_labels = [
             "O3",
             "O3",
@@ -350,20 +350,24 @@ class TestMoleculeParser(ut.TestCase):
         expected = [['C3', 'c', 4.83011, 3.324808, 8.455088], ['N3', 'c', 6.161905, 3.788994, 7.88156], ['C3', 'c', 7.220745, 2.895686, 8.513159], ['C3', 'c', 6.397724, 5.180814, 8.451904], ['C3', 'c', 6.1946, 3.75862, 6.31222], ['C3', 'c', 4.945194, 4.483277, 5.647685], ['C3', 'c', 4.979264, 4.459574, 4.085763], ['C3', 'c', 4.969565, 2.981314, 3.591792], ['C3', 'c', 6.226391, 2.252318, 4.154536], ['C3', 'c', 7.51891, 2.958961, 3.645259], ['C3', 'c', 7.514742, 4.436779, 4.139009], ['C3', 'c', 6.264519, 5.178019, 3.576141], ['C3', 'c', 7.477267, 4.471708, 5.700619], ['C3', 'c', 6.200373, 2.284586, 5.716433], ['H', 'c', 4.017955, 4.016539, 8.222224], ['H', 'c', 4.542973, 2.340072, 8.086151], ['H', 'c', 4.851905, 3.250254, 9.54753], ['H', 'c', 7.258823, 3.003216, 9.602398], ['H', 'c', 8.222497, 3.121634, 8.147489], ['H', 'c', 7.030236, 1.836671, 8.327245], ['H', 'c', 6.271272, 5.210916, 9.539288], ['H', 'c', 7.412234, 5.537266, 8.262431], ['H', 'c', 5.705685, 5.916762, 8.042423], ['H', 'c', 4.0126, 4.003621, 5.951342], ['H', 'c', 4.884963, 5.524763, 5.967577], ['H', 'c', 4.098047, 4.976359, 3.693026], ['H', 'c', 4.059035, 2.476016, 3.926954], ['H', 'c', 4.973546, 2.949387, 2.498315], ['H', 'c', 6.224387, 1.213327, 3.810382], ['H', 'c', 7.560203, 2.926874, 2.552551], ['H', 'c', 8.406514, 2.43942, 4.018054], ['H', 'c', 8.420772, 4.93772, 3.783894], ['H', 'c', 6.287484, 5.178398, 2.482436], ['H', 'c', 6.265999, 6.222865, 3.900202], ['H', 'c', 7.513433, 5.522539, 5.994632], ['H', 'c', 8.393, 4.007367, 6.070015], ['H', 'c', 5.323668, 1.727296, 6.050269], ['H', 'c', 7.077224, 1.731698, 6.059157]]
         self.assertEqual(table.values.tolist(), expected)
 
+    def test_pymatgen(self):
+        struct = self.parser.get_pymatgen_molecule()
+        self.assertIsInstance(struct, Molecule)
+
 
 class TestParserCoreShell(ut.TestCase):
     def setUp(self):
         self.parser = StructureParser.from_file(get_jobs_path("slc/coreshell.out"))
 
     def test_parsing(self):
-        _, coords = self.parser.get_frac_coords(include_shell=True)
+        _, coords = self.parser.get_coords(include_shell=True)
         self.assertEqual(len(coords), 40)
 
-        _, coords = self.parser.get_frac_coords(include_shell=False)
+        _, coords = self.parser.get_coords(include_shell=False)
         self.assertEqual(len(coords), 24)
 
     def test_noshell(self):
-        _, coords = self.parser.get_frac_coords()
+        _, coords = self.parser.get_coords()
 
         expected_coords = np.array(
             [
@@ -399,7 +403,7 @@ class TestParserCoreShell(ut.TestCase):
         )
 
     def test_with_shell(self):
-        _, coords = self.parser.get_frac_coords(include_shell=True)
+        _, coords = self.parser.get_coords(include_shell=True)
 
         expected_coords = [
             [0.92427, 0.12066, 0.06241],
