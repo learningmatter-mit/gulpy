@@ -115,14 +115,10 @@ class TestJointStructure(ut.TestCase):
         self.assertEqual(self.joint.get_bonds(), bonds_gcrys + bonds_gmol)
 
     def test_lattice(self):
-        expected = np.array([
-            [9.873, 0, 0],
-            [0, 5.254, 0],
-            [0, 0, 8.77]
-        ])
-        self.assertIsNone(np.testing.assert_almost_equal(
-            self.joint.get_lattice(), expected
-        ))
+        expected = np.array([[9.873, 0, 0], [0, 5.254, 0], [0, 0, 8.77]])
+        self.assertIsNone(
+            np.testing.assert_almost_equal(self.joint.get_lattice(), expected)
+        )
 
 
 if __name__ == "__main__":

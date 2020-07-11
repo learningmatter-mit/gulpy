@@ -466,7 +466,7 @@ class TestMoleculeMD(ut.TestCase):
 
     def test_md_props(self):
         frame = self.parser.get_md_props()[0]
-        self.assertIsInstance(frame['structure'], Molecule)
+        self.assertIsInstance(frame["structure"], Molecule)
 
 
 if __name__ == "__main__":

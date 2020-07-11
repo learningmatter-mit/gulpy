@@ -7,20 +7,16 @@ from .runtime import run_gulp
 
 
 thisdir = os.path.dirname(os.path.abspath(__file__))
-DEFAULTS_PATH = os.path.abspath(os.path.join(thisdir, 'defaults'))
+DEFAULTS_PATH = os.path.abspath(os.path.join(thisdir, "defaults"))
 
-INPUT_SUFFIX = 'gin'
-OUTPUT_SUFFIX = 'out'
-STDOUT_SUFFIX = 'log'
+INPUT_SUFFIX = "gin"
+OUTPUT_SUFFIX = "out"
+STDOUT_SUFFIX = "log"
 
 
 class Job:
     def __init__(
-        self,
-        structure,
-        library,
-        keywords=[],
-        options={},
+        self, structure, library, keywords=[], options={},
     ):
         self.structure = structure
         self.library = library
@@ -32,19 +28,19 @@ class Job:
 
     @property
     def __name__(self):
-        return 'base_job'
+        return "base_job"
 
     def get_defaults(self):
         path = os.path.join(DEFAULTS_PATH, self.__name__ + ".yml")
         if not os.path.exists(path):
             return [], {}, {}
 
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             defaults = yaml.safe_load(f)
 
-        kwds = defaults.get('keywords', [])
-        opts = defaults.get('options', {})
-        parse_opts = defaults.get('parse', {})
+        kwds = defaults.get("keywords", [])
+        opts = defaults.get("options", {})
+        parse_opts = defaults.get("parse", {})
 
         return kwds, opts, parse_opts
 
@@ -52,21 +48,14 @@ class Job:
         self.keywords = kwds
 
     def update_options(self, opts):
-        self.options = {
-            **self.options,
-            **opts
-        }
+        self.options = {**self.options, **opts}
 
     def write_input(self, path):
         writer = InputWriter(
-            self.keywords,
-            self.options,
-            self.structure,
-            self.library,
-            self.__name__
+            self.keywords, self.options, self.structure, self.library, self.__name__
         )
 
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             f.write(str(writer))
 
     def run(self, inp):
@@ -87,7 +76,4 @@ class Job:
 
     def parse_results(self, out):
         parser = self.parser.from_file(out)
-        return {
-            key: getattr(parser, attr)()
-            for key, attr in self.parse_opts.items()
-        }
+        return {key: getattr(parser, attr)() for key, attr in self.parse_opts.items()}

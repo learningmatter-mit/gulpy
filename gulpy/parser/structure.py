@@ -128,4 +128,3 @@ class StructureParser(Parser):
             coords=cart_coords,
             site_properties={"gulp_labels": labels},
         )
-

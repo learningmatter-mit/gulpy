@@ -88,7 +88,11 @@ class MolecularDynamicsParser(StructureParser):
         vels = [x[table.index] for x in self.get_velocities()]
         energies = [x[table.index].sum() for x in self.get_site_energies()]
         props = self.get_step_props()
-        traj = self.get_pymatgen_trajectory(include_shell) if self.is_bulk() else self.get_pymatgen_molecules(include_shell)
+        traj = (
+            self.get_pymatgen_trajectory(include_shell)
+            if self.is_bulk()
+            else self.get_pymatgen_molecules(include_shell)
+        )
 
         return [
             {

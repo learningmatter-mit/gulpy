@@ -19,7 +19,7 @@ class TestJob(ut.TestCase):
             get_jobs_path("md/md.out"), get_jobs_path("md/md.trg")
         )
 
-        self.assertTrue('frames' in results)
+        self.assertTrue("frames" in results)
 
 
 class TestMoleculeMDJob(ut.TestCase):
@@ -34,7 +34,7 @@ class TestMoleculeMDJob(ut.TestCase):
             get_jobs_path("md/molecule.out"), get_jobs_path("md/molecule.trg")
         )
 
-        self.assertTrue('frames' in results)
+        self.assertTrue("frames" in results)
 
 
 if __name__ == "__main__":

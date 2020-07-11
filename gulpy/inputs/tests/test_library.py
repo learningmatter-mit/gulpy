@@ -72,39 +72,34 @@ class TestLibrary(ut.TestCase):
 
         self.assertEqual(str(self.library), libstr)
 
-    @ut.skipUnless('GULP_LIB' in os.environ, "GULP_LIB not defined. Skipping...")
+    @ut.skipUnless("GULP_LIB" in os.environ, "GULP_LIB not defined. Skipping...")
     def test_from_gulp(self):
-        library = Library.from_gulp('catlow.lib')
-        expected_species = {'O_OH', 'H_OH', 'Mg', 'Si', 'O_O2-', 'Al', 'Na', 'P'}
+        library = Library.from_gulp("catlow.lib")
+        expected_species = {"O_OH", "H_OH", "Mg", "Si", "O_O2-", "Al", "Na", "P"}
         self.assertEqual(library.species, expected_species)
 
     def test_join(self):
-        old = ['a', 'b &', 'c', 'd']
-        new = ['a', 'b & c', 'd']
-        self.assertEqual(
-            self.library.join_ampersand(old),
-            new
-        )
+        old = ["a", "b &", "c", "d"]
+        new = ["a", "b & c", "d"]
+        self.assertEqual(self.library.join_ampersand(old), new)
 
     def test_break(self):
-        old = ['a', 'b &', 'c', 'd']
-        new = ['a', 'b & c', 'd']
-        self.assertEqual(
-            self.library.break_ampersand(new),
-            old
-        )
+        old = ["a", "b &", "c", "d"]
+        new = ["a", "b & c", "d"]
+        self.assertEqual(self.library.break_ampersand(new), old)
+
 
 class TestLibraryLabels(ut.TestCase):
     def test_dreiding_structure(self):
-        lbl = LibraryLabels.get_labels('dreiding.lib')
+        lbl = LibraryLabels.get_labels("dreiding.lib")
         self.assertIsInstance(lbl, labels.DreidingLabels)
 
     def test_dreiding_molecule(self):
-        lbl = LibraryLabels.get_labels('dreiding.lib', is_molecule=True)
+        lbl = LibraryLabels.get_labels("dreiding.lib", is_molecule=True)
         self.assertIsInstance(lbl, labels.DreidingMoleculeLabels)
 
     def test_catlow(self):
-        lbl = LibraryLabels.get_labels('catlow.lib')
+        lbl = LibraryLabels.get_labels("catlow.lib")
         self.assertIsInstance(lbl, labels.CatlowLabels)
 
 

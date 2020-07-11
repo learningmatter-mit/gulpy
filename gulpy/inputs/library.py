@@ -55,11 +55,13 @@ class Library(Parser):
 
         to_remove = set(self.species) - set(species)
 
-        return self.break_ampersand([
-            line
-            for line in self.join_ampersand(self.lines)
-            if not contains_removable_species(line, to_remove)
-        ])
+        return self.break_ampersand(
+            [
+                line
+                for line in self.join_ampersand(self.lines)
+                if not contains_removable_species(line, to_remove)
+            ]
+        )
 
     def join_ampersand(self, lines):
         text = "\n".join(lines)
@@ -95,16 +97,19 @@ class Library(Parser):
 
 class LibraryLabels:
     STRUCT_LABELS = {
-        'catlow.lib': labels.CatlowLabels,
-        'dreiding.lib': labels.DreidingLabels,
+        "catlow.lib": labels.CatlowLabels,
+        "dreiding.lib": labels.DreidingLabels,
     }
 
     MOLECULE_LABELS = {
-        'dreiding.lib': labels.DreidingMoleculeLabels,
+        "dreiding.lib": labels.DreidingMoleculeLabels,
     }
 
     @staticmethod
     def get_labels(library, is_molecule=False):
-        labels = LibraryLabels.MOLECULE_LABELS if is_molecule else LibraryLabels.STRUCT_LABELS
+        labels = (
+            LibraryLabels.MOLECULE_LABELS
+            if is_molecule
+            else LibraryLabels.STRUCT_LABELS
+        )
         return labels[library]()
-

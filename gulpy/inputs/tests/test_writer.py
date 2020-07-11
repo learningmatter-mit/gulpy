@@ -24,7 +24,9 @@ class TestInputWriter(ut.TestCase):
         self.assertEqual(self.writer._render_keywords(), "opti conv")
 
     def test_options(self):
-        self.assertEqual(self.writer._render_options(), "maxstep 150\nshellmass\nO_O2- 0.1")
+        self.assertEqual(
+            self.writer._render_options(), "maxstep 150\nshellmass\nO_O2- 0.1"
+        )
 
     def test_lattice(self):
         expected = "\nvectors\n   9.8730000    0.0000000    0.0000000\n   0.0000000    5.2540000    0.0000000\n   0.0000000    0.0000000    8.7700000 \n"

@@ -17,7 +17,4 @@ class MDJob(Job):
 
     def parse_results(self, out, traj_file):
         parser = self.parser.from_file(out, traj_file)
-        return {
-            key: getattr(parser, attr)()
-            for key, attr in self.parse_opts.items()
-        }
+        return {key: getattr(parser, attr)() for key, attr in self.parse_opts.items()}
