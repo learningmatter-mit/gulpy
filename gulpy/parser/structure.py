@@ -27,7 +27,14 @@ class StructureParser(Parser):
         _, line = self.find_line("Initial cell volume")
         return self.parse_vector(line)[0]
 
+    def get_dimensionality(self):
+        _, line = self.find_line("Dimensionality =")
+        return self.parse_int(line)
+
     def get_lattice(self, input=False):
+        if self.get_dimensionality() != 3:
+            return []
+
         if input:
             idx, _ = self.find_line("Cartesian lattice vectors (Angstroms)")
         else:
@@ -36,10 +43,11 @@ class StructureParser(Parser):
         return self.parse_matrix(self.lines[idx + 2 : idx + 5])
 
     def get_structure_table(self, input=False, include_shell=False):
+        coords_type = "Fractional" if self.get_dimensionality() == 3 else "Cartesian"
         if input:
-            idx, _ = self.find_line("Fractional coordinates")
+            idx, _ = self.find_line(f"{coords_type} coordinates")
         else:
-            idx, _ = self.find_line("Final fractional coordinates of atoms")
+            idx, _ = self.find_line(f"Final {coords_type.lower()} coordinates of atoms")
 
         table = pd.DataFrame(
             self.parse_columns(

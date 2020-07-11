@@ -1,0 +1,141 @@
+opti conp
+title
+ 
+end
+
+cartesian
+  C_3  core    4.76350    3.56507    8.39721
+  N_3  core    6.14079    3.81175    7.85097
+  C_3  core    7.03495    2.78737    8.47416
+  C_3  core    6.56797    5.14369    8.39538
+  C_3  core    6.19460    3.75862    6.31222
+  C_3  core    4.95883    4.47693    5.66443
+  C_3  core    5.00532    4.44836    4.12645
+  C_3  core    5.00116    2.98210    3.64603
+  C_3  core    6.25468    2.27458    4.18649
+  C_3  core    7.54686    2.96706    3.70630
+  C_3  core    7.50454    4.42956    4.18013
+  C_3  core    6.27089    5.17484    3.63813
+  C_3  core    7.47448    4.45905    5.72741
+  C_3  core    6.20375    2.29436    5.73655
+   H_  core    4.08748    4.40541    8.21571
+   H_  core    4.34461    2.67235    7.95822
+   H_  core    4.77411    3.41351    9.46352
+   H_  core    7.13908    2.98292    9.52157
+   H_  core    8.03016    2.82281    8.05266
+   H_  core    6.64126    1.77285    8.37242
+   H_  core    6.27074    5.27555    9.42334
+   H_  core    7.65068    5.28499    8.34320
+   H_  core    6.09498    5.93806    7.84770
+   H_  core    4.03560    3.97981    5.95399
+   H_  core    4.90878    5.50988    5.99773
+   H_  core    4.14001    4.94938    3.73924
+   H_  core    4.09838    2.47223    3.97718
+   H_  core    5.03414    2.95404    2.57330
+   H_  core    6.26606    1.27754    3.79028
+   H_  core    7.60998    2.93990    2.63014
+   H_  core    8.42559    2.46037    4.10430
+   H_  core    8.36264    4.92855    3.78343
+   H_  core    6.30010    5.16146    2.56283
+   H_  core    6.26831    6.21335    3.96754
+   H_  core    7.49245    5.50365    6.01551
+   H_  core    8.37001    3.98586    6.12182
+   H_  core    5.32162    1.76339    6.08005
+   H_  core    7.07727    1.75451    6.08835
+
+connect 1 2 single
+connect 2 3 single
+connect 2 4 single
+connect 2 5 single
+connect 5 6 single
+connect 6 7 single
+connect 7 8 single
+connect 8 9 single
+connect 9 10 single
+connect 10 11 single
+connect 11 12 single
+connect 11 13 single
+connect 9 14 single
+connect 13 5 single
+connect 14 5 single
+connect 12 7 single
+connect 1 15 single
+connect 1 16 single
+connect 1 17 single
+connect 3 18 single
+connect 3 19 single
+connect 3 20 single
+connect 4 21 single
+connect 4 22 single
+connect 4 23 single
+connect 6 24 single
+connect 6 25 single
+connect 7 26 single
+connect 8 27 single
+connect 8 28 single
+connect 9 29 single
+connect 10 30 single
+connect 10 31 single
+connect 11 32 single
+connect 12 33 single
+connect 12 34 single
+connect 13 35 single
+connect 13 36 single
+connect 14 37 single
+connect 14 38 single
+
+species
+H_     core
+C_3    core
+N_3    core
+keyword molmec
+element
+mass H_       1.00800
+mass C_3     12.01100
+mass N_3     14.00670
+end
+rtol 0.0
+element
+cova H     0.420
+cova B     0.800
+cova C     0.770
+cova N     0.702
+cova O     0.800
+cova F     0.611
+cova Al    1.047
+cova Si    0.937
+cova P     0.890
+cova S     1.040
+cova Ga    1.210
+cova Ge    1.210
+cova As    1.210
+cova Se    1.210
+cova In    1.390
+cova Sn    1.373
+cova Sb    1.432
+cova Te    1.280
+cova I     1.360
+end
+harmonic bond kcal
+H_       H_           700.0    0.6500
+C_3      H_           700.0    1.0900
+C_3      C_3          700.0    1.5300
+N_3      H_           700.0    1.0220
+N_3      C_3          700.0    1.4620
+N_3      N_3          700.0    1.3940
+three-body bond kcal
+C_3      X X   100.0  109.4710
+N_3      X X   100.0  106.7000
+torsion bond kcal dreiding single
+X     C_3   C_3   X     1.0    -3 180.00
+X     N_3   C_3   X     1.0    -3 180.00
+X     N_3   N_3   X     1.0    -3 180.00
+epsilon kcal
+H_    0.0152 3.1950
+C_3   0.0951 3.8983
+N_3   0.0774 3.6621
+lennard epsilon 12 6 kcal x13 geometric all
+0.0 12.5
+hydrogen-bond kcal 12 10 4 taper dreiding
+H_     N_3   N_3  3741298.1709492207 593660.5362167358 105.0 115.0 &
+0.0 3.0 0.0 3.0 0.0 5.0

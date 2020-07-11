@@ -1,8 +1,9 @@
 import numpy as np
+import pandas as pd
 import unittest as ut
 from pymatgen.core import Structure
 
-from gulpy.parser import StructureParser
+from gulpy.parser import StructureParser, ParseError
 from gulpy.tests.test_files import get_jobs_path
 
 
@@ -17,6 +18,10 @@ class TestParser(ut.TestCase):
     def test_num_atoms(self):
         n = self.parser.get_num_atoms()
         self.assertEqual(n, 130)
+
+    def test_dimensionality(self):
+        n = self.parser.get_dimensionality()
+        self.assertEqual(n, 3)
 
     def test_num_molecules(self):
         n = self.parser.get_num_molecules()
@@ -314,6 +319,36 @@ class TestParser(ut.TestCase):
     def test_pymatgen(self):
         struct = self.parser.get_pymatgen_structure()
         self.assertIsInstance(struct, Structure)
+
+
+class TestMoleculeParser(ut.TestCase):
+    def setUp(self):
+        self.parser = StructureParser.from_file(get_jobs_path("opti/molecule.out"))
+
+    def test_volume(self):
+        with self.assertRaises(ParseError):
+            self.parser.get_volume()
+
+    def test_num_atoms(self):
+        n = self.parser.get_num_atoms()
+        self.assertEqual(n, 38)
+
+    def test_dimensionality(self):
+        n = self.parser.get_dimensionality()
+        self.assertEqual(n, 0)
+
+    def test_input_structure_table(self):
+        table = self.parser.get_structure_table(input=True)
+        self.assertIsInstance(table, pd.DataFrame)
+
+        expected = [['C3', 'c', 4.7635, 3.5651, 8.3972], ['N3', 'c', 6.1408, 3.8117, 7.851], ['C3', 'c', 7.0349, 2.7874, 8.4742], ['C3', 'c', 6.568, 5.1437, 8.3954], ['C3', 'c', 6.1946, 3.7586, 6.3122], ['C3', 'c', 4.9588, 4.4769, 5.6644], ['C3', 'c', 5.0053, 4.4484, 4.1264], ['C3', 'c', 5.0012, 2.9821, 3.646], ['C3', 'c', 6.2547, 2.2746, 4.1865], ['C3', 'c', 7.5469, 2.9671, 3.7063], ['C3', 'c', 7.5045, 4.4296, 4.1801], ['C3', 'c', 6.2709, 5.1748, 3.6381], ['C3', 'c', 7.4745, 4.4591, 5.7274], ['C3', 'c', 6.2038, 2.2944, 5.7366], ['H', 'c', 4.0875, 4.4054, 8.2157], ['H', 'c', 4.3446, 2.6723, 7.9582], ['H', 'c', 4.7741, 3.4135, 9.4635], ['H', 'c', 7.1391, 2.9829, 9.5216], ['H', 'c', 8.0302, 2.8228, 8.0527], ['H', 'c', 6.6413, 1.7729, 8.3724], ['H', 'c', 6.2707, 5.2755, 9.4233], ['H', 'c', 7.6507, 5.285, 8.3432], ['H', 'c', 6.095, 5.9381, 7.8477], ['H', 'c', 4.0356, 3.9798, 5.954], ['H', 'c', 4.9088, 5.5099, 5.9977], ['H', 'c', 4.14, 4.9494, 3.7392], ['H', 'c', 4.0984, 2.4722, 3.9772], ['H', 'c', 5.0341, 2.954, 2.5733], ['H', 'c', 6.2661, 1.2775, 3.7903], ['H', 'c', 7.61, 2.9399, 2.6301], ['H', 'c', 8.4256, 2.4604, 4.1043], ['H', 'c', 8.3626, 4.9285, 3.7834], ['H', 'c', 6.3001, 5.1615, 2.5628], ['H', 'c', 6.2683, 6.2134, 3.9675], ['H', 'c', 7.4924, 5.5037, 6.0155], ['H', 'c', 8.37, 3.9859, 6.1218], ['H', 'c', 5.3216, 1.7634, 6.08], ['H', 'c', 7.0773, 1.7545, 6.0884]]
+        self.assertEqual(table.values.tolist(), expected)
+
+    def test_output_structure_table(self):
+        table = self.parser.get_structure_table(input=False)
+
+        expected = [['C3', 'c', 4.83011, 3.324808, 8.455088], ['N3', 'c', 6.161905, 3.788994, 7.88156], ['C3', 'c', 7.220745, 2.895686, 8.513159], ['C3', 'c', 6.397724, 5.180814, 8.451904], ['C3', 'c', 6.1946, 3.75862, 6.31222], ['C3', 'c', 4.945194, 4.483277, 5.647685], ['C3', 'c', 4.979264, 4.459574, 4.085763], ['C3', 'c', 4.969565, 2.981314, 3.591792], ['C3', 'c', 6.226391, 2.252318, 4.154536], ['C3', 'c', 7.51891, 2.958961, 3.645259], ['C3', 'c', 7.514742, 4.436779, 4.139009], ['C3', 'c', 6.264519, 5.178019, 3.576141], ['C3', 'c', 7.477267, 4.471708, 5.700619], ['C3', 'c', 6.200373, 2.284586, 5.716433], ['H', 'c', 4.017955, 4.016539, 8.222224], ['H', 'c', 4.542973, 2.340072, 8.086151], ['H', 'c', 4.851905, 3.250254, 9.54753], ['H', 'c', 7.258823, 3.003216, 9.602398], ['H', 'c', 8.222497, 3.121634, 8.147489], ['H', 'c', 7.030236, 1.836671, 8.327245], ['H', 'c', 6.271272, 5.210916, 9.539288], ['H', 'c', 7.412234, 5.537266, 8.262431], ['H', 'c', 5.705685, 5.916762, 8.042423], ['H', 'c', 4.0126, 4.003621, 5.951342], ['H', 'c', 4.884963, 5.524763, 5.967577], ['H', 'c', 4.098047, 4.976359, 3.693026], ['H', 'c', 4.059035, 2.476016, 3.926954], ['H', 'c', 4.973546, 2.949387, 2.498315], ['H', 'c', 6.224387, 1.213327, 3.810382], ['H', 'c', 7.560203, 2.926874, 2.552551], ['H', 'c', 8.406514, 2.43942, 4.018054], ['H', 'c', 8.420772, 4.93772, 3.783894], ['H', 'c', 6.287484, 5.178398, 2.482436], ['H', 'c', 6.265999, 6.222865, 3.900202], ['H', 'c', 7.513433, 5.522539, 5.994632], ['H', 'c', 8.393, 4.007367, 6.070015], ['H', 'c', 5.323668, 1.727296, 6.050269], ['H', 'c', 7.077224, 1.731698, 6.059157]]
+        self.assertEqual(table.values.tolist(), expected)
 
 
 class TestParserCoreShell(ut.TestCase):
