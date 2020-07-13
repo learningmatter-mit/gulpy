@@ -16,7 +16,10 @@ class PropertyParser(StructureParser):
 
     def get_forces(self):
         """Get forces and convert their unit to Ha/bohr"""
-        idx, _ = self.find_line("Final internal derivatives")
+        try:
+            idx, _ = self.find_line("Final internal derivatives")
+        except ParseError:
+            idx, _ = self.find_line("Final Cartesian derivatives")
 
         table = pd.DataFrame(
             self.parse_columns(
