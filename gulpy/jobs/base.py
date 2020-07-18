@@ -76,4 +76,5 @@ class Job:
 
     def parse_results(self, out):
         parser = self.parser.from_file(out)
+        assert parser.is_completed(), "Job is not completed!"
         return {key: getattr(parser, attr)() for key, attr in self.parse_opts.items()}

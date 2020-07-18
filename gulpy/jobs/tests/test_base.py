@@ -21,6 +21,10 @@ class TestJob(ut.TestCase):
     def test_options(self):
         self.assertEqual(self.job.options, {})
 
+    def test_parse_error(self):
+        with self.assertRaises(AssertionError):
+            self.job.parse_results("../../tests/jobs/opti/aborted.out")
+
 
 if __name__ == "__main__":
     ut.main()
