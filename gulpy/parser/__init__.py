@@ -3,3 +3,4 @@ from .structure import StructureParser
 from .property import PropertyParser
 from .job import JobParser
 from .md import MolecularDynamicsParser
+from .error import ErrorParser

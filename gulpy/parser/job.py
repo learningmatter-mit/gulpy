@@ -10,6 +10,13 @@ class JobParser(Parser):
         except ParseError:
             return False
 
+    def has_error(self):
+        try:
+            idx, _ = self.find_line("!! ERROR :")
+            return True
+        except ParseError:
+            return False
+
     def get_version(self):
         return self.find_pattern("Version = (.*) \* Last modified.*")[0]
 
