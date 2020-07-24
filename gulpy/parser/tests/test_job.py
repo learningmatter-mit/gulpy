@@ -10,6 +10,9 @@ class TestParser(ut.TestCase):
     def setUp(self):
         self.parser = JobParser.from_file(get_jobs_path("opti/opti.out"))
 
+    def test_error(self):
+        self.assertFalse(self.parser.has_error())
+
     def test_completed(self):
         self.assertTrue(self.parser.is_completed())
 
