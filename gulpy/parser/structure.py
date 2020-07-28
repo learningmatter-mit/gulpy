@@ -98,10 +98,12 @@ class StructureParser(Parser):
 
         try:
             lattice = self.get_lattice()
-            labels, frac_coords = self.get_coords()
-
         except ParseError:
             lattice = self.get_lattice(input=True)
+
+        try:
+            labels, frac_coords = self.get_coords()
+        except ParseError:
             labels, frac_coords = self.get_coords(input=True)
 
         renamer = self.get_species_labels()
