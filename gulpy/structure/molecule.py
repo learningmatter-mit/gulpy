@@ -1,8 +1,9 @@
 import re
+from typing import List
 import rdkit.Chem.AllChem as Chem
 from rdkit.Chem import Mol, Conformer, MolFromSmiles
 
-from pymatgen.core import Molecule
+from pymatgen.core import Molecule, Structure
 
 from .base import GulpObject
 from .labels import MoleculeLabels
@@ -77,3 +78,4 @@ def to_mol(coords, smiles, add_hydrogens=True):
     mol.AddConformer(conformer)
 
     return mol
+

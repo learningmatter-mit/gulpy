@@ -3,7 +3,7 @@ import numpy as np
 import unittest as ut
 
 from pymatgen.core import Molecule
-from gulpy.structure import GulpMolecule
+from gulpy.structure.molecule import GulpMolecule
 from gulpy.tests.test_files import load_structure, load_molecule
 
 
