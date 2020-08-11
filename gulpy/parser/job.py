@@ -20,6 +20,14 @@ class JobParser(Parser):
     def get_version(self):
         return self.find_pattern("Version = (.*) \* Last modified.*")[0]
 
+    def get_host(self):
+        host = self.find_pattern("Host name\s+= (.*)")
+
+        if len(host) > 0:
+            return host[0]
+
+        return None
+
     def get_duration(self):
         return float(self.find_pattern("Total CPU time\s+%s" % FLOAT_REGEX)[-1])
 

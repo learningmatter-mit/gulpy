@@ -25,6 +25,12 @@ class TestParser(ut.TestCase):
     def test_nprocs(self):
         self.assertEqual(self.parser.get_nprocs(), 1)
 
+    def test_host(self):
+        parser = JobParser.from_file(get_jobs_path("slc/coreshell.out"))
+        host = parser.get_host()
+        self.assertEqual(host, "node1034")
+        self.assertIsNone(self.parser.get_host())
+
 
 if __name__ == "__main__":
     ut.main()
