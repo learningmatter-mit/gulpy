@@ -23,7 +23,7 @@ class TestJob(ut.TestCase):
 
     def test_parse_error(self):
         with self.assertRaises(AssertionError):
-            self.job.parse_results("../../tests/jobs/opti/aborted.out")
+            self.job.parse_results("../../tests/jobs/error/aborted.out")
 
 
 if __name__ == "__main__":
