@@ -15,4 +15,3 @@ class TestExtractMolecule(ut.TestCase):
         extracted = self.extractor.extract_molecule(indices)
 
         self.assertEqual(len(extracted), 29)
-

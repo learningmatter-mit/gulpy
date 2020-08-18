@@ -4,4 +4,3 @@ from .job import JobParser
 
 class ErrorParser(JobParser):
     pass
-    

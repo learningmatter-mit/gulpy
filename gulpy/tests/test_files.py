@@ -53,24 +53,44 @@ def load_molecule_structure():
         [0.715376, 0.043017, 0.088095],
         [0.722655, 0.959258, 0.173358],
         [0.850704, 0.957870, 0.145277],
-        [0.820082, 0.051357, 0.194224]
+        [0.820082, 0.051357, 0.194224],
     ]
     species = [
-        'C', 'C', 'N', 'C', 'C', 'C', 'C', 'C', 'C', 
-        'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H',
-        'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H',
-        'H', 'H'
+        "C",
+        "C",
+        "N",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
     ]
     lattice = Lattice.from_parameters(
-        12.46433002, 12.46420102, 26.22526509,
-        89.99366812, 90.00714732, 90.00004617
+        12.46433002, 12.46420102, 26.22526509, 89.99366812, 90.00714732, 90.00004617
     )
 
-    return Structure(
-        coords=frac_coords,
-        species=species,
-        lattice=lattice
-    )
+    return Structure(coords=frac_coords, species=species, lattice=lattice)
 
 
 class TestInputs(ut.TestCase):

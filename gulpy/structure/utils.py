@@ -11,9 +11,8 @@ from pymatgen.analysis.local_env import JmolNN
 
 class MoleculeExtractor:
     def __init__(
-        self,
-        structure: Structure,
-    ): 
+        self, structure: Structure,
+    ):
         """Extracts a molecule from a pymatgen Structure using the given indices.
             Useful when the molecule crosses the boundary of the unit cell and
             the atoms are disconnected when the information on the lattice is ignored.
@@ -25,7 +24,7 @@ class MoleculeExtractor:
             species=[sp for i, sp in enumerate(self.structure.species) if i in indices],
             coords=self.structure.cart_coords[indices],
             lattice=self.structure.lattice.matrix,
-            coords_are_cartesian=True
+            coords_are_cartesian=True,
         )
 
     def get_structure_graph(self, struct: Structure) -> nx.Graph:
@@ -38,10 +37,7 @@ class MoleculeExtractor:
         for u, v in dfs_edges(nx.Graph(sgraph.graph), source=0):
             node_coords[v] = node_coords[u] + vectors[(u, v)]
 
-        final_coords = np.array([
-            node_coords[k]
-            for k in sorted(node_coords.keys())
-        ])
+        final_coords = np.array([node_coords[k] for k in sorted(node_coords.keys())])
 
         return final_coords
 
@@ -56,7 +52,7 @@ class MoleculeExtractor:
                 v = conn_site.index
                 vcoords = conn_site.site.coords
                 distance_vectors[(u, v)] = vcoords - ucoords
-        
+
         return distance_vectors
 
     def extract_molecule(self, indices: List[int]) -> Molecule:
@@ -64,7 +60,4 @@ class MoleculeExtractor:
         sgraph = self.get_structure_graph(struct)
         coords = self.walk_graph_and_get_coords(sgraph)
 
-        return Molecule(
-            species=struct.species,
-            coords=coords
-        )
+        return Molecule(species=struct.species, coords=coords)

@@ -78,4 +78,3 @@ def to_mol(coords, smiles, add_hydrogens=True):
     mol.AddConformer(conformer)
 
     return mol
-

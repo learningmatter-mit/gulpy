@@ -1,3 +1,4 @@
+import os
 import unittest as ut
 
 from gulpy.jobs import Job
@@ -5,7 +6,7 @@ from gulpy.inputs import Library
 from gulpy.inputs.tests.test_library import ExampleLibrary
 from gulpy.structure import GulpCrystal
 from gulpy.structure.labels import CatlowLabels
-from gulpy.tests.test_files import load_structure
+from gulpy.tests.test_files import load_structure, thisdir
 
 
 class TestJob(ut.TestCase):
@@ -23,7 +24,7 @@ class TestJob(ut.TestCase):
 
     def test_parse_error(self):
         with self.assertRaises(AssertionError):
-            self.job.parse_results("../../tests/jobs/error/aborted.out")
+            self.job.parse_results(os.path.join(thisdir, "jobs/error/aborted.out"))
 
 
 if __name__ == "__main__":
