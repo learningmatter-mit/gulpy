@@ -14,7 +14,7 @@ setup(
     version="1.0.0",
     author="Daniel Schwalbe-Koda",
     email="dskoda@mit.edu",
-    url="https://github.com/learningmatter/gulpy",
+    url="https://github.com/learningmatter-mit/gulpy",
     packages=find_packages("."),
     scripts=[],
     python_requires=">=3.5",
