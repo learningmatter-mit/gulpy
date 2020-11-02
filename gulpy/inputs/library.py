@@ -99,10 +99,12 @@ class LibraryLabels:
     STRUCT_LABELS = {
         "catlow.lib": labels.CatlowLabels,
         "dreiding.lib": labels.DreidingLabels,
+        "default": labels.Labels,
     }
 
     MOLECULE_LABELS = {
         "dreiding.lib": labels.DreidingMoleculeLabels,
+        "default": labels.MoleculeLabels,
     }
 
     @staticmethod
@@ -112,4 +114,4 @@ class LibraryLabels:
             if is_molecule
             else LibraryLabels.STRUCT_LABELS
         )
-        return labels[library]()
+        return labels.get(library, labels["default"])()

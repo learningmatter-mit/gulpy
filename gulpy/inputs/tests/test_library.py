@@ -102,6 +102,10 @@ class TestLibraryLabels(ut.TestCase):
         lbl = LibraryLabels.get_labels("catlow.lib")
         self.assertIsInstance(lbl, labels.CatlowLabels)
 
+    def test_default(self):
+        lbl = LibraryLabels.get_labels("suttonchen_alloy.lib")
+        self.assertIsInstance(lbl, labels.Labels)
+
 
 if __name__ == "__main__":
     ut.main()
