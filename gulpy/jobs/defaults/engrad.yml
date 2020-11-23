@@ -1,0 +1,13 @@
+keywords:
+    - single
+    - gradient
+
+parse:
+    duration: get_duration
+    nprocs: get_nprocs
+    completed: is_completed
+    version: get_version
+
+    energy: get_total_energy
+    forces: get_forces
+    structure: get_pymatgen_structure

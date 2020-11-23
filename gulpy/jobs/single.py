@@ -14,3 +14,9 @@ class SingleJob(Job):
     @property
     def parser(self):
         return SingleParser
+
+
+class EngradJob(SingleJob):
+    @property
+    def __name__(self):
+        return "engrad"
