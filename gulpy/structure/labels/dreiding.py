@@ -75,6 +75,9 @@ class DreidingMoleculeLabels(MoleculeLabels):
         if atom.GetIsAromatic():
             return "_R"
 
+        if atom.GetSymbol() in ["F"]: 
+            return "_"
+
         if self.has_hybridization(atom):
             return "_%s" % self.get_hybridization(atom)
 
