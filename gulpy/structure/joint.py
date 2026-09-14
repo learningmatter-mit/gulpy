@@ -60,7 +60,8 @@ class JointStructure(GulpObject):
 
     def get_coords(self):
         joint_coords = self.get_joint_property("get_coords")
-        return np.concatenate(joint_coords, axis=0)
+        return np.concatenate([c.reshape(-1, 3) for c in joint_coords], axis=0)
+
 
     def get_species(self):
         return flatten(self.get_joint_property("get_species"))
