@@ -44,10 +44,19 @@ class GulpMolecule(GulpObject):
             atom_1 = bond.GetBeginAtomIdx()
             atom_2 = bond.GetEndAtomIdx()
             btype = self.DEFAULT_BONDS[str(bond.GetBondType())]
+            if self.is_exocyclic(bond):
+                btype = btype + " exocyclic"
             # GULP starts counting on 1
             bonds.append((atom_1 + 1, atom_2 + 1, btype))
 
         return bonds
+
+    def is_exocyclic(self, bond):
+        """Checks if a bond is part of a ring or not."""
+
+        if bond.IsInRing():
+            return False
+        return bond.GetBeginAtom().IsInRing() or bond.GetEndAtom().IsInRing()
 
     def get_coords(self):
         return self.mol.GetConformer().GetPositions()
