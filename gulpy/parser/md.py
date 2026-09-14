@@ -77,7 +77,7 @@ class MolecularDynamicsParser(StructureParser):
         df = pd.DataFrame(
             np.concatenate(steps),
             columns=["time", "kinetic_energy", "total_energy", "temperature"],
-        ).applymap(float)
+        ).map(float)
 
         return df
 

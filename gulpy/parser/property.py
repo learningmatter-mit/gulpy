@@ -28,7 +28,7 @@ class PropertyParser(StructureParser):
             columns=["label", "x", "y", "z"],
         )
 
-        forces = table[["x", "y", "z"]].applymap(float).values.tolist()
+        forces = table[["x", "y", "z"]].map(float).values.tolist()
 
         return forces
 

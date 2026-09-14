@@ -9,18 +9,18 @@ GULPy is a Python interface for the General Utility Lattice Program (GULP). The 
 
 This software requires the following packages:
 - [numpy](https://numpy.org/)
-- [pymatgen](https://pymatgen.org)
-- [pandas](https://pandas.pydata.org/)
+- [pymatgen](https://pymatgen.org) (>= 2024.3.29)
+- [pandas](https://pandas.pydata.org/) (>= 2.1)
 - [rdkit](https://rdkit.org/)
 - [networkx](https://networkx.github.io/)
 - [PyYAML](https://github.com/yaml/pyyaml)
 
 ```bash
-conda upgrade conda
-conda create -n gulpy python=3.7 numpy pandas networkx pymatgen>=2020.3.2 scikit-learn -c conda-forge
+conda create -n gulpy python=3.14 numpy pandas networkx pyyaml rdkit pymatgen setuptools -c conda-forge
 conda activate gulpy
-conda install rdkit -c rdkit
 ```
+
+Quote any version specifier you add (e.g. `"pymatgen>=2024.3.29"`), or the shell reads `>` as an output redirect.
 
 You can then install GULPy by running
 

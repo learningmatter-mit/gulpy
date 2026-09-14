@@ -58,7 +58,7 @@ class StructureParser(Parser):
             ),
             columns=["label", "cs", "x", "y", "z"],
         )
-        table[["x", "y", "z"]] = table[["x", "y", "z"]].applymap(float)
+        table[["x", "y", "z"]] = table[["x", "y", "z"]].map(float)
 
         if not include_shell:
             table = table[table["cs"] == "c"]
@@ -72,7 +72,7 @@ class StructureParser(Parser):
             table = table[table["cs"] == "c"]
 
         labels = table["label"].values.tolist()
-        coords = table[["x", "y", "z"]].applymap(float).values.tolist()
+        coords = table[["x", "y", "z"]].map(float).values.tolist()
 
         return labels, coords
 

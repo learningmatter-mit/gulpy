@@ -30,7 +30,7 @@ class MoleculeExtractor:
         )
 
     def get_structure_graph(self, struct: Structure) -> nx.Graph:
-        sgraph = StructureGraph.with_local_env_strategy(struct, JmolNN())
+        sgraph = StructureGraph.from_local_env_strategy(struct, JmolNN())
         return sgraph
 
     def walk_graph_and_get_coords(self, sgraph: StructureGraph) -> np.array:

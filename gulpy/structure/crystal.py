@@ -16,7 +16,7 @@ class GulpCrystal(GulpObject):
 
     # TODO: implement better way to write bonds in crystals
     def get_bonds(self):
-        graph = StructureGraph.with_local_env_strategy(
+        graph = StructureGraph.from_local_env_strategy(
             self.structure, CutOffDictNN({("Si", "O"): 2.0, ("O", "Si"): 2.0})
         )
 
