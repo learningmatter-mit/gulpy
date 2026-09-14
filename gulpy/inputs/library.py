@@ -7,7 +7,7 @@ from .options import is_header, is_comment, is_reserved
 
 class Library(Parser):
     @classmethod
-    def from_gulp(cls, library_name):
+    def from_gulp(cls, library_name): # e.g. library_name='dreiding.lib'
         path = os.environ.get("GULP_LIB", None)
         assert (
             path is not None
@@ -40,13 +40,17 @@ class Library(Parser):
         Args:
             species (list/set of str): contains all species to be considered in the library
         """
-
         if species is None:
             species = self.species
-
-        species_lines = self.get_lines_with_species(species)
-        clean_lines = self.review_lines(species_lines)
-
+        try:
+            species_lines = self.get_lines_with_species(species)
+            clean_lines = self.review_lines(species_lines)
+        except Exception as e:
+            print(f"\ngulpy/inputs/library.py - DEBUG species: {species}\n")
+            species_lines = self.get_lines_with_species(species)
+            print(f"\ngulpy/inputs/library.py - DEBUG species_lines: {species_lines}\n")
+            clean_lines = self.review_lines(species_lines)
+            print(f"\ngulpy/inputs/library.py - DEBUG clean_lines: {clean_lines}\n")
         return clean_lines
 
     def get_lines_with_species(self, species):

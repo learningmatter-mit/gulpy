@@ -71,7 +71,7 @@ class InputWriter(FileWriter):
         return """cartesian\n{}\n""".format(coord_lines)
 
     def _render_library(self):
-        species = set(self.structure.get_labels())
+        species = set(self.structure.get_labels()) # e.g. JointStructure or maybe GulpCrystal
         return "\n".join(self.library.get_library(species))
 
     def _render_extras(self):

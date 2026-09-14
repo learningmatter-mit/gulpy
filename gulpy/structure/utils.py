@@ -1,3 +1,4 @@
+from tkinter import E
 import numpy as np
 import networkx as nx
 from networkx.algorithms.traversal.depth_first_search import dfs_edges
@@ -7,6 +8,7 @@ from typing import List
 from pymatgen.core import Molecule, Structure
 from pymatgen.analysis.graphs import StructureGraph
 from pymatgen.analysis.local_env import JmolNN
+import pymatgen
 
 
 class MoleculeExtractor:
@@ -59,5 +61,9 @@ class MoleculeExtractor:
         struct = self.get_molecular_structure_from_indices(indices)
         sgraph = self.get_structure_graph(struct)
         coords = self.walk_graph_and_get_coords(sgraph)
-
-        return Molecule(species=struct.species, coords=coords)
+        
+        try:
+            return Molecule(species=struct.species, coords=coords)
+        except pymatgen.core.structure.StructureError:
+            print("\ngulpy/structure/utils.py - DEBUG - gulpy.structure.utils.MoleculeExtractor", struct.species)
+            print("\ngulpy/structure/utils.py - DEBUG - gulpy.structure.utils.MoleculeExtractor", len(coords))
